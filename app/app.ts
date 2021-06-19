@@ -11,9 +11,6 @@
  */
 
 import { createTag } from './dom';
-import { Observable } from './observable';
-
-const first = new Observable<number>(0);
 
 function wrapSections(selector: string) {
   document.querySelectorAll(selector).forEach(($div) => {
@@ -27,14 +24,4 @@ function wrapSections(selector: string) {
 
 window.addEventListener('load', () => {
   wrapSections('main > div');
-  const header = document.querySelector('header div h1');
-
-  first.subscribe((newVal: number) => {
-    if (header) header.innerHTML = newVal.toString();
-  });
-});
-
-document.addEventListener('scroll', function (e) {
-  console.log('scroll');
-  first.value = e.timeStamp;
 });
