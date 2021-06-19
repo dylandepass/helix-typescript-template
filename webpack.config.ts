@@ -10,7 +10,7 @@ const webpackConfig = (env: Environment): Configuration => ({
   mode: env.production || !env.development ? 'production' : 'development',
   ...(env.production || !env.development ? {} : { devtool: 'source-map' }),
   entry: {
-    app: ['./playground/app.ts', './playground/styles/styles.css']
+    app: ['./app/app.ts', './app/styles/styles.css']
   },
   watch: true,
   output: {
