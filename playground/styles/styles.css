@@ -1,0 +1,15 @@
+:root {
+  --color-red: #f00500;
+  --color-orange: #f06500;
+  --color-pink: #0000ff;
+}
+
+p {
+  color: var(--color-pink);
+}
+
+.section-wrapper {
+  p {
+    color: var(--color-red);
+  }
+}
