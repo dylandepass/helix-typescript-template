@@ -16,6 +16,8 @@ body.appear {
 }
 
 p {
+  font-weight: 300;
+  font-size: 18px;
   color: var(--color-pink);
 }
 
