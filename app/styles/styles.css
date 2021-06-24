@@ -26,9 +26,3 @@ p {
     color: var(--color-red);
   }
 }
-
-em:before {
-  font-family: 'Font Awesome 5 Free';
-  content: '\f30c';
-  font-weight: 900; /* <-- add this */
-}
