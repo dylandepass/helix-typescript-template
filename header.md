@@ -1,3 +1,4 @@
 # This is the header
 
-<img src="./playground/assets/image.png"/>
+<img src="./app/assets/image.png"/>
+<i class="icon-camera-retro"></i>
