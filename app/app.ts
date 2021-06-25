@@ -12,13 +12,16 @@
 
 import { decorate as decorateButton } from './blocks/Button';
 import { decorate as decorateColumn } from './blocks/Columns';
+import { decorate as decorateHero } from './blocks/Hero';
 import { createElement } from './dom';
 import './styles/styles.scss';
 
 function wrapSections(selector: string) {
   document.querySelectorAll(selector).forEach(($div) => {
     if (!$div.id) {
-      const $wrapper = createElement('div', { class: 'section' });
+      const $wrapper = createElement('div', {
+        class: 'container section'
+      });
       $div.parentNode?.appendChild($wrapper);
       $wrapper.appendChild($div);
     }
@@ -26,22 +29,31 @@ function wrapSections(selector: string) {
 }
 
 window.addEventListener('load', () => {
-  document.querySelector('main')?.classList.add('container');
-  const columnBlock = document.querySelector('.columns');
+  const main = document.querySelector('main');
+  if (main) {
+    //main.classList.add('container');
 
-  if (columnBlock) {
-    const columns = decorateColumn(
-      columnBlock,
-      { classes: ['is-variable', 'is-8'] },
-      [{ classes: ['is-two-fifths'] }, { classes: ['is-three-fifths'] }]
-    );
+    const heroBlock = document.querySelector('main > div:first-of-type');
+    if (heroBlock) {
+      decorateHero(heroBlock, main);
+    }
 
-    const accountColumn = columns[1];
-    const buttonElement = accountColumn.querySelector('p a');
-    if (buttonElement) {
-      decorateButton(buttonElement, accountColumn, {
-        classes: ['customButton']
-      });
+    const columnBlock = document.querySelector('.columns');
+
+    if (columnBlock) {
+      const columns = decorateColumn(
+        columnBlock,
+        { classes: ['is-variable'] },
+        [{ classes: ['is-two-fifths'] }, { classes: ['is-three-fifths'] }]
+      );
+
+      const accountColumn = columns[1];
+      const buttonElement = accountColumn.querySelector('p a');
+      if (buttonElement) {
+        decorateButton(buttonElement, accountColumn, {
+          classes: ['customButton']
+        });
+      }
     }
   }
 
