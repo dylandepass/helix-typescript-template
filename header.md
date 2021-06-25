@@ -1,4 +1,4 @@
-<nav class="navbar">
+<nav class="navbar is-black has-shadow is-fixed-top">
   <div class="container">
     <div id="navMenu" class="navbar-menu">
       <div class="navbar-start">
