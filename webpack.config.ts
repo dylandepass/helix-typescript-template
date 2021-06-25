@@ -10,7 +10,7 @@ const webpackConfig = (env: Environment): Configuration => ({
   mode: env.production || !env.development ? 'production' : 'development',
   ...(env.production || !env.development ? {} : { devtool: 'source-map' }),
   entry: {
-    app: ['./app/app.ts', './app/styles/styles.css']
+    app: ['./app/app.ts']
   },
   watch: true,
   output: {
@@ -24,21 +24,14 @@ const webpackConfig = (env: Environment): Configuration => ({
   module: {
     rules: [
       {
-        test: /\.css$/i,
-        exclude: /node_modules/,
+        test: /\.s[ac]ss$/i,
         use: [
-          {
-            loader: 'style-loader'
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1
-            }
-          },
-          {
-            loader: 'postcss-loader'
-          }
+          // Creates `style` nodes from JS strings
+          'style-loader',
+          // Translates CSS into CommonJS
+          'css-loader',
+          // Compiles Sass to CSS
+          'sass-loader'
         ]
       },
       {

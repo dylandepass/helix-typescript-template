@@ -11,7 +11,7 @@
  */
 
 import { applyElementModifier, ElementModifier } from '../../dom';
-import './style.css';
+import './style.scss';
 
 export function decorate(
   block: Element,
@@ -19,13 +19,21 @@ export function decorate(
   columnModifiers?: ElementModifier[]
 ): Element[] {
   const row = block.children[0];
-  row.classList.add('row');
+  const frag = document.createDocumentFragment();
+  const rowChildren = Array.from(row.children);
+  for (const col of rowChildren) {
+    frag.appendChild(col);
+  }
+
+  block.removeChild(row);
+  block.appendChild(frag);
+
   if (rowModifier) {
-    applyElementModifier(row, rowModifier);
+    applyElementModifier(block, rowModifier);
   }
 
   const columns: Element[] = [];
-  const children = Array.from(row.children);
+  const children = Array.from(block.children);
   for (const index in children) {
     const column = children[index];
     if (columnModifiers) {

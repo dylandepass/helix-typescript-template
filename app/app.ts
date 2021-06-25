@@ -13,11 +13,12 @@
 import { decorate as decorateButton } from './blocks/Button';
 import { decorate as decorateColumn } from './blocks/Columns';
 import { createElement } from './dom';
+import './styles/styles.scss';
 
 function wrapSections(selector: string) {
   document.querySelectorAll(selector).forEach(($div) => {
     if (!$div.id) {
-      const $wrapper = createElement('div', { class: 'section-wrapper' });
+      const $wrapper = createElement('div', { class: 'section' });
       $div.parentNode?.appendChild($wrapper);
       $wrapper.appendChild($div);
     }
@@ -25,13 +26,15 @@ function wrapSections(selector: string) {
 }
 
 window.addEventListener('load', () => {
+  document.querySelector('main')?.classList.add('container');
   const columnBlock = document.querySelector('.columns');
 
   if (columnBlock) {
-    const columns = decorateColumn(columnBlock, { classes: ['aboutme'] }, [
-      { classes: ['cla1'], attributes: { 'data-col': '50' } },
-      { classes: ['cla2'], attributes: { 'data-col': '50' } }
-    ]);
+    const columns = decorateColumn(
+      columnBlock,
+      { classes: ['is-variable', 'is-8'] },
+      [{ classes: ['is-two-fifths'] }, { classes: ['is-three-fifths'] }]
+    );
 
     const accountColumn = columns[1];
     const buttonElement = accountColumn.querySelector('p a');
@@ -41,6 +44,8 @@ window.addEventListener('load', () => {
       });
     }
   }
+
+  wrapSections('main > div');
 
   document.body.classList.add('appear');
 });
