@@ -36,11 +36,13 @@ export function decorate(block: Element, parent: Element): Element {
     .querySelector('img')
     ?.attributes.getNamedItem('src')?.value;
   console.log(image);
-  let temp = createTemplate(title!, subtitle, image);
+  let temp = createTemplate(title || '', subtitle || '', image || '');
   const template = document.createElement('template');
   temp = temp.trim(); // Never return a text node of whitespace as the result
   template.innerHTML = temp;
-  parent.insertBefore(template.content.firstChild!, parent.firstChild);
+  if (template.content.firstChild) {
+    parent.insertBefore(template.content.firstChild, parent.firstChild);
+  }
   //  parent.appendChild(template.content.firstChild!);
   parent.removeChild(block);
   return template;
