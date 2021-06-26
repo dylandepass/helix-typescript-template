@@ -12,7 +12,7 @@ const webpackConfig = (env: Environment): Configuration => ({
   entry: {
     app: ['./app/app.ts']
   },
-  watch: true,
+  watch: env.production || !env.development ? false : true,
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: '[name]-bundle.js'
