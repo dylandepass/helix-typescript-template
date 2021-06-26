@@ -3,7 +3,7 @@ name: Deploy Build to Prod
 on: 
   push:
     branches:
-      - main
+      - dev
 
 jobs:
   build:
@@ -36,7 +36,7 @@ jobs:
     
         # Name of the branch to use, if different from the one that triggered the workflow
         # Default: the branch that triggered the run
-        branch: main
+        branch: dev
 
         # Determines the way the action fills missing author name and email. Three options are available:
         # - github_actor -> UserName <UserName@users.noreply.github.com>
