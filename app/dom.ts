@@ -14,10 +14,7 @@ export interface ElementModifier {
   attributes?: Record<string, string>;
 }
 
-export function createElement(
-  name: string,
-  attrs?: Record<string, string>
-): HTMLElement {
+export function createElement(name: string, attrs?: Record<string, string>): HTMLElement {
   console.log('create');
   const el = document.createElement(name);
   if (typeof attrs === 'object') {
@@ -28,10 +25,7 @@ export function createElement(
   return el;
 }
 
-export function applyElementModifier(
-  element: Element,
-  modifier: ElementModifier
-): void {
+export function applyElementModifier(element: Element, modifier: ElementModifier): void {
   if (modifier.classes) {
     addElementClasses(element, modifier.classes);
   }
@@ -46,10 +40,7 @@ export function addElementClasses(element: Element, classes: string[]): void {
   }
 }
 
-export function addElementAttributes(
-  element: Element,
-  attributes: Record<string, string>
-): void {
+export function addElementAttributes(element: Element, attributes: Record<string, string>): void {
   for (const key of Object.keys(attributes)) {
     element.setAttribute(key, attributes[key]);
   }
