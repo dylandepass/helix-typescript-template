@@ -12,11 +12,7 @@
 
 import './style.scss';
 
-function createTemplate(
-  title: string,
-  subtitle: string,
-  backgroundImage: string
-): string {
+function createTemplate(title: string, subtitle: string, backgroundImage: string): string {
   return `
     <section class="hero hero-background is-halfheight" style="background-image: url(${backgroundImage})">
       <div class="hero-body">
@@ -32,9 +28,7 @@ function createTemplate(
 export function decorate(block: Element, parent: Element): Element {
   const title = block.querySelector('h1')?.innerHTML;
   const subtitle = block.querySelector('h3')?.innerHTML;
-  const image = block
-    .querySelector('img')
-    ?.attributes.getNamedItem('src')?.value;
+  const image = block.querySelector('img')?.attributes.getNamedItem('src')?.value;
   console.log(image);
   let temp = createTemplate(title || '', subtitle || '', image || '');
   const template = document.createElement('template');

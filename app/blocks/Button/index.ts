@@ -10,17 +10,9 @@
  * governing permissions and limitations under the License.
  */
 
-import {
-  applyElementModifier,
-  createElement,
-  ElementModifier
-} from '../../dom';
+import { applyElementModifier, createElement, ElementModifier } from '../../dom';
 
-export function decorate(
-  block: Element,
-  parent: Element,
-  buttonModifier?: ElementModifier
-): Element {
+export function decorate(block: Element, parent: Element, buttonModifier?: ElementModifier): Element {
   const wrapper = createElement('div');
   if (buttonModifier) {
     applyElementModifier(wrapper, buttonModifier);
