@@ -18,33 +18,27 @@ export function decorate(
   rowModifier?: ElementModifier,
   columnModifiers?: ElementModifier[]
 ): Element[] {
-  const row = block.children[0];
-  const frag = document.createDocumentFragment();
-  const rowChildren = Array.from(row.children);
-  for (const col of rowChildren) {
-    frag.appendChild(col);
-  }
-
-  block.removeChild(row);
-  block.appendChild(frag);
-
-  if (rowModifier) {
-    applyElementModifier(block, rowModifier);
-  }
-
-  const columns: Element[] = [];
-  const children = Array.from(block.children);
-  for (const index in children) {
-    const column = children[index];
-    if (columnModifiers) {
-      const modifier = columnModifiers[index];
-      if (modifier) {
-        applyElementModifier(column, modifier);
-      }
+  const rows: Element[] = [];
+  block.removeAttribute('class');
+  for (const row of Object.values(block.children)) {
+    row.classList.add('columns');
+    if (rowModifier) {
+      applyElementModifier(row, rowModifier);
     }
-    column.classList.add('column');
-    columns.push(column);
+
+    const children = Array.from(row.children);
+    for (const index in children) {
+      const column = children[index];
+      if (columnModifiers) {
+        const modifier = columnModifiers[index];
+        if (modifier) {
+          applyElementModifier(column, modifier);
+        }
+      }
+      column.classList.add('column');
+      rows.push(column);
+    }
   }
 
-  return columns;
+  return rows;
 }

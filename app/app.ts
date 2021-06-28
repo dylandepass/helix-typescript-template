@@ -10,8 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import { decorate as decorateButton } from './blocks/Button';
-import { decorate as decorateColumn } from './blocks/Columns';
+import { decorate as decorateColumns } from './blocks/Columns';
 import { decorate as decorateHero } from './blocks/Hero';
 import { createElement } from './dom';
 import './styles/styles.scss';
@@ -31,29 +30,29 @@ function wrapSections(selector: string) {
 window.addEventListener('load', () => {
   const main = document.querySelector('main');
   if (main) {
-    //main.classList.add('container');
-
     const heroBlock = document.querySelector('main > div:first-of-type');
     if (heroBlock) {
       decorateHero(heroBlock, main);
     }
 
-    const columnBlock = document.querySelector('.columns');
-
+    const columnBlock = document.querySelector('.columns:first-of-type');
     if (columnBlock) {
-      const columns = decorateColumn(
-        columnBlock,
-        { classes: ['is-variable'] },
-        [{ classes: ['is-two-fifths'] }, { classes: ['is-three-fifths'] }]
-      );
+      decorateColumns(columnBlock, { classes: ['is-variable'] }, [
+        { classes: ['is-two-fifths'] },
+        { classes: ['is-three-fifths'] }
+      ]);
+    }
 
-      const accountColumn = columns[1];
-      const buttonElement = accountColumn.querySelector('p a');
-      if (buttonElement) {
-        decorateButton(buttonElement, accountColumn, {
-          classes: ['customButton']
-        });
-      }
+    const skillsBlock = document.querySelector('.skills');
+    if (skillsBlock) {
+      decorateColumns(skillsBlock, {}, [
+        {
+          classes: ['is-narrow', 'icon', 'has-text-centered-mobile']
+        },
+        { classes: ['has-text-centered-mobile'] },
+        { classes: ['is-narrow', 'icon', 'has-text-centered-mobile'] },
+        { classes: ['has-text-centered-mobile'] }
+      ]);
     }
   }
 
