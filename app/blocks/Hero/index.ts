@@ -17,7 +17,7 @@ function createTemplate(title: string, subtitle: string, backgroundImage: string
     <section class="hero hero-background is-halfheight" style="background-image: url(${backgroundImage})">
       <div class="hero-body">
         <div class="">
-          <h1 class='has-text-white'>${title}</h1>
+          <h1 class='has-text-black'>${title}</h1>
           <h3 class='has-text-white'>${subtitle}</h3>
         </div>
       </div>
