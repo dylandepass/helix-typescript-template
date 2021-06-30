@@ -1,7 +1,7 @@
 {
   "name": "helix-typescript-template",
   "version": "1.0.0",
-  "repository": "https://github.com/dylandepass/hlx-playground.git",
+  "repository": "https://github.com/dylandepass/helix-typescript-template.git",
   "author": "Dylan Depass <dyland@adobe.com>",
   "license": "MIT",
   "scripts": {
@@ -13,7 +13,6 @@
     "@types/node": "^15.12.4",
     "@typescript-eslint/eslint-plugin": "^4.27.0",
     "@typescript-eslint/parser": "^4.27.0",
-    "copy-webpack-plugin": "^9.0.0",
     "css-loader": "^5.2.6",
     "eslint": "^7.29.0",
     "eslint-plugin-header": "^3.1.1",
