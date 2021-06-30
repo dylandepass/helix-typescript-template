@@ -16,14 +16,14 @@ import './style.scss';
 
 function createHero(renderer: CommonDOMRenderer, title: string, subtitle: string, backgroundImage: string): Node {
   return (
-    <section class="hero hero-background is-halfheight" style={`background-image: url(${backgroundImage})`}>
+    <header class="hero hero-background is-halfheight" style={`background-image: url(${backgroundImage})`}>
       <div class="hero-body">
         <div class="">
           <h1 class="has-text-white">{title}</h1>
           <h3 class="has-text-white">{subtitle}</h3>
         </div>
       </div>
-    </section>
+    </header>
   );
 }
 
@@ -33,6 +33,6 @@ export function decorate(block: Element, parent: Element): void {
   const image = getElementAttribute(block, 'img', 'src');
   const renderer = new CommonDOMRenderer();
   const heroTemplate = createHero(renderer, title || '', subtitle || '', image || '');
-  renderer.render(heroTemplate).on(parent);
+  renderer.render(heroTemplate).after(parent.previousElementSibling!);
   parent.removeChild(block);
 }
