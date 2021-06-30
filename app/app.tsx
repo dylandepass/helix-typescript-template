@@ -10,19 +10,24 @@
  * governing permissions and limitations under the License.
  */
 
+import { CommonDOMRenderer } from 'render-jsx/dom';
 import { decorate as decorateColumns } from './blocks/Columns';
 import { decorate as decorateHero } from './blocks/Hero';
+import { decorate as decorateSwiper } from './blocks/Swiper';
 import { createElement } from './dom';
 import './styles/styles.scss';
 
 function wrapSections(selector: string) {
   document.querySelectorAll(selector).forEach(($div) => {
     if (!$div.id) {
-      const $wrapper = createElement('div', {
-        class: 'container section'
-      });
-      $div.parentNode?.appendChild($wrapper);
-      $wrapper.appendChild($div);
+      // const $wrapper = createElement('div', {
+      //   class: 'container section'
+      // });
+
+      $div.classList.add('container');
+      $div.classList.add('section');
+      // $div.parentNode?.appendChild($wrapper);
+      // $wrapper.appendChild($div);
     }
   });
 }
@@ -31,8 +36,8 @@ window.addEventListener('load', () => {
   const main = document.querySelector('main');
   if (main) {
     const heroBlock = document.querySelector('main > div:first-of-type');
-    if (heroBlock) {
-      decorateHero(heroBlock, main);
+    if (heroBlock && heroBlock.parentElement) {
+      decorateHero(heroBlock, heroBlock.parentElement);
     }
 
     const columnBlock = document.querySelector('.columns:first-of-type');
@@ -54,9 +59,25 @@ window.addEventListener('load', () => {
         { classes: ['has-text-centered-mobile'] }
       ]);
     }
+
+    const swiperBlock = document.querySelector('.swiper');
+    if (swiperBlock && swiperBlock.parentElement) {
+      decorateSwiper(swiperBlock, swiperBlock.parentElement, (slide: Element): void => {
+        const pictureTag = slide.querySelector('picture');
+        if (pictureTag) {
+          pictureTag.classList.add('image');
+          pictureTag.classList.add('is-128x128');
+          pictureTag.classList.add('m-auto');
+          pictureTag.classList.add('pb-6');
+          const imgTag = pictureTag.querySelector('img');
+          imgTag?.classList.add('is-circle');
+          imgTag?.classList.add('is-rounded');
+        }
+      });
+    }
   }
 
-  wrapSections('main > div');
+  wrapSections(`main > div:not(.swiper header)`);
 
   document.body.classList.add('appear');
 });

@@ -6,6 +6,11 @@
         "editor.formatOnPaste": true,
         "editor.formatOnSave": true,
     },
+    "[typescriptreact]": {
+        "editor.formatOnPaste": true,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
     "[json]": {
         "editor.formatOnPaste": true,
         "editor.formatOnSave": true,

@@ -1,0 +1,20 @@
+version: 1
+
+indices:
+  blog:
+    source: html
+    fetch: https://{repo}-{owner}.hlx.page/{path}
+    include:
+      - '*.(docx|md|gdoc)'
+    exclude:
+      - '**/Document.*'
+    target: https://docs.google.com/spreadsheets/d/1YYen1DXf6U53suR3ZSFJIbdh1yehvYQ4nMvQIkwTHkw
+    properties:
+      title:
+        select: head > meta[property="og:title"]
+        value: |
+          attribute(el, 'content')
+      teaser:
+        select: head > meta[name="description"]
+        value: |
+          attribute(el, 'content')
