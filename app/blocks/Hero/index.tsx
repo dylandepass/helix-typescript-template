@@ -34,5 +34,5 @@ export function decorate(block: Element, parent: Element): void {
   const renderer = new CommonDOMRenderer();
   const heroTemplate = createHero(renderer, title || '', subtitle || '', image || '');
   renderer.render(heroTemplate).on(parent);
-  //parent.removeChild(block);
+  parent.removeChild(block);
 }
