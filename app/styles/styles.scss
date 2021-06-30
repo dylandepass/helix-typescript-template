@@ -2,10 +2,13 @@
 @import 'bulma/sass/grid/columns.sass';
 @import 'bulma/sass/elements/content.sass';
 @import 'bulma/sass/elements/container.sass';
+@import 'bulma/sass/elements/image.sass';
 @import 'bulma/sass/layout/section.sass';
 @import 'bulma/sass/layout/hero.sass';
 @import 'bulma/sass/components/navbar.sass';
 @import 'bulma/sass/helpers/color.sass';
+@import 'bulma/sass/helpers/spacing.sass';
+@import 'swiper/swiper-bundle.css';
 
 body {
   font-family: 'Roboto', sans-serif;
