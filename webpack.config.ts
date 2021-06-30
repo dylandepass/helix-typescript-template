@@ -9,8 +9,23 @@ interface Environment {
 const webpackConfig = (env: Environment): Configuration => ({
   mode: env.production || !env.development ? 'production' : 'development',
   ...(env.production || !env.development ? {} : { devtool: 'source-map' }),
+  optimization: {
+    runtimeChunk: 'single'
+  },
   entry: {
-    app: ['./app/app.tsx']
+    app: {
+      import: './app/app.tsx',
+      dependOn: 'shared'
+    },
+    home: {
+      import: './app/templates/Home/index.tsx',
+      dependOn: 'shared'
+    },
+    about: {
+      import: './app/templates/About/index.tsx',
+      dependOn: 'shared'
+    },
+    shared: ['render-jsx']
   },
   watch: env.production || !env.development ? false : true,
   output: {

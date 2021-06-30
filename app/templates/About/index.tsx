@@ -10,17 +10,16 @@
  * governing permissions and limitations under the License.
  */
 
-import { loadScript } from './dom';
-import './styles/styles.scss';
+import './styles.scss';
 
-window.addEventListener('load', () => {
-  const main = document.querySelector('main');
-  if (main) {
-    const templateElement = document.querySelector('.template');
-    if (templateElement) {
-      const template = templateElement?.textContent;
-      console.log(`template ${template}`);
-      loadScript(`/build/${template}-bundle.js`);
-    }
-  }
-});
+function decoratePage() {
+  document.body.classList.add('appear');
+}
+
+if (document.readyState == 'loading') {
+  window.addEventListener('DOMContentLoaded', () => {
+    decoratePage();
+  });
+} else {
+  decoratePage();
+}
