@@ -45,3 +45,26 @@ export function addElementAttributes(element: Element, attributes: Record<string
     element.setAttribute(key, attributes[key]);
   }
 }
+
+export function wrapNodes(newParent: HTMLElement, nodes: NodeListOf<Element>): void {
+  nodes.forEach((el) => {
+    newParent.appendChild(el.cloneNode(true));
+    if (newParent.children.length !== 1) {
+      el.parentNode?.removeChild(el);
+    } else {
+      el.parentNode?.replaceChild(newParent, el);
+    }
+  });
+}
+
+export function wrap(classname: string, selectors: string | string[], root: HTMLElement): void {
+  if (!Array.isArray(selectors)) {
+    selectors = [selectors];
+  }
+  const div = createElement('div', { class: classname });
+
+  for (const selector of selectors) {
+    const elements = (root || document).querySelectorAll(selector);
+    wrapNodes(div, elements);
+  }
+}
