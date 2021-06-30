@@ -13,7 +13,7 @@
 import { loadScript } from './dom';
 import './styles/styles.scss';
 
-window.addEventListener('load', () => {
+function decorateTemplate() {
   const main = document.querySelector('main');
   if (main) {
     const templateElement = document.querySelector('.template');
@@ -23,4 +23,12 @@ window.addEventListener('load', () => {
       loadScript(`/build/${template}-bundle.js`);
     }
   }
-});
+}
+
+if (document.readyState == 'loading') {
+  window.addEventListener('DOMContentLoaded', () => {
+    decorateTemplate();
+  });
+} else {
+  decorateTemplate();
+}
