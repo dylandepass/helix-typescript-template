@@ -88,7 +88,6 @@ export function loadScript(url: string, type = 'text/javascript'): Promise<void>
       }
       head.append(script);
       script.onload = function () {
-        console.log(`${url} Script loaded`);
         resolve();
       };
     }
