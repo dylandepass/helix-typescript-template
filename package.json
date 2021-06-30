@@ -31,6 +31,7 @@
     "webpack-cli": "^4.7.2"
   },
   "dependencies": {
-    "bulma": "^0.9.3"
+    "bulma": "^0.9.3",
+    "render-jsx": "^0.2.4"
   }
 }
