@@ -68,3 +68,11 @@ export function wrap(classname: string, selectors: string | string[], root: HTML
     wrapNodes(div, elements);
   }
 }
+
+export function getElementContent(element: Element, selector: string): string | undefined {
+  return element.querySelector(selector)?.innerHTML;
+}
+
+export function getElementAttribute(element: Element, selector: string, attribute: string): string | undefined {
+  return element.querySelector(selector)?.attributes.getNamedItem(attribute)?.value;
+}

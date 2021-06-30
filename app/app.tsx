@@ -58,21 +58,6 @@ window.addEventListener('load', () => {
   }
 
   wrapSections('main > div');
-  const val = 'VLUE';
-  const cats = ['f', 's', 'g'];
-  const renderer = new CommonDOMRenderer();
-  renderer
-    .render(
-      <div>
-        <b>{val}</b> World!
-        <ul>
-          {cats.map((cat) => {
-            return <li>cat</li>
-          })}
-        </ul>
-      </div>
-    )
-    .on(document.body);
 
   document.body.classList.add('appear');
 });
