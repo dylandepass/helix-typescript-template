@@ -47,7 +47,8 @@ const webpackConfig = (env: Environment): Configuration => ({
           'css-loader',
           // Compiles Sass to CSS
           'sass-loader'
-        ]
+        ],
+        sideEffects: true
       },
       {
         test: /\.html$/i,

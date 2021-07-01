@@ -25,10 +25,10 @@ function decoratePage() {
       decorateHero(heroBlock, heroBlock.parentElement);
     }
 
-    //Decorate columns
-    const columnBlock = document.querySelector('.columns:first-of-type');
-    if (columnBlock) {
-      decorateColumns(columnBlock, { classes: ['is-variable'] }, [
+    //Decorate about
+    const aboutBlock = document.querySelector('.about');
+    if (aboutBlock) {
+      decorateColumns(aboutBlock, { classes: ['is-variable'] }, [
         { classes: ['is-two-fifths'] },
         { classes: ['is-three-fifths'] }
       ]);
@@ -44,6 +44,18 @@ function decoratePage() {
         { classes: ['has-text-centered-mobile'] },
         { classes: ['is-narrow', 'icon', 'has-text-centered-mobile'] },
         { classes: ['has-text-centered-mobile'] }
+      ]);
+    }
+
+    //Decorate cards
+    const cardsBlock = document.querySelector('.cards');
+    if (cardsBlock) {
+      decorateColumns(cardsBlock, { classes: ['is-variable', 'is-6'] }, [
+        {
+          classes: ['card']
+        },
+        { classes: ['card', 'orange-card'] },
+        { classes: ['card'] }
       ]);
     }
 

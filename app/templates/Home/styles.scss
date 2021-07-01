@@ -1,3 +1,86 @@
 @import 'bulma/sass/utilities/_all.sass';
 @import 'bulma/sass/layout/hero.sass';
 @import 'swiper/swiper-bundle.css';
+@import '../../styles/styles.scss';
+
+.about {
+  div:first-of-type {
+    h1 {
+      font-weight: 400;
+      font-size: 26px;
+      letter-spacing: 1px;
+      line-height: 1.4em;
+    }
+    h3 {
+      font-weight: 400;
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+    hr {
+      border: 1px solid #f4b942;
+      max-width: 40px;
+      margin-left: 0;
+    }
+    -webkit-font-smoothing: antialiased;
+  }
+  div:nth-of-type(2) {
+    p {
+      font-weight: 300;
+      font-size: 18px;
+      letter-spacing: 1px;
+      line-height: 1.6em;
+    }
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+.card > div {
+  @extend .is-light-blue;
+  color: #ffffff;
+  text-align: center;
+  padding: 40px;
+
+  h3 {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 35px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  p {
+    font-size: 18px;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img {
+    margin-bottom: 50px;
+    width: 90%;
+    height: auto;
+    transition-duration: 0.3s;
+  }
+
+  img:hover {
+    width: 100%;
+  }
+}
+
+.card.orange-card > div {
+  @extend .is-highlight;
+  color: #202131;
+  img {
+    margin-bottom: 65px;
+  }
+}
+
+// .blue-card {
+//   @extend .is-light-blue;
+//   color: #ffffff;
+// }
+
+// .orange-card {
+//   @extend .is-highlight;
+// }
