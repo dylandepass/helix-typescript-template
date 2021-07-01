@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import { applyElementModifier, ElementModifier } from '../../dom';
+import { applyElementModifier, createElement, ElementModifier, wrapElements } from '../../dom';
 import './style.scss';
 
 export function decorate(
@@ -19,9 +19,11 @@ export function decorate(
   columnModifiers?: ElementModifier[]
 ): Element[] {
   const rows: Element[] = [];
+  const blockClasses = block.classList.value;
   block.removeAttribute('class');
   for (const row of Object.values(block.children)) {
     row.classList.add('columns');
+    row.classList.add(blockClasses);
     if (rowModifier) {
       applyElementModifier(row, rowModifier);
     }
@@ -29,6 +31,8 @@ export function decorate(
     const children = Array.from(row.children);
     for (const index in children) {
       const column = children[index];
+      const contentWrapper = createElement('div');
+      wrapElements(contentWrapper, Array.from(column.children));
       if (columnModifiers) {
         const modifier = columnModifiers[index];
         if (modifier) {

@@ -32,7 +32,7 @@ jobs:
       with:
         # The arguments for the `git add` command (see the paragraph below for more info)
         # Default: '.'
-        add: './build/app-bundle.js --force'
+        add: './build --force'
     
         # Name of the branch to use, if different from the one that triggered the workflow
         # Default: the branch that triggered the run

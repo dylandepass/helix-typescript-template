@@ -57,6 +57,17 @@ export function wrapNodes(newParent: HTMLElement, nodes: NodeListOf<Element>): v
   });
 }
 
+export function wrapElements(newParent: HTMLElement, elements: Element[]): void {
+  elements.forEach((el) => {
+    newParent.appendChild(el.cloneNode(true));
+    if (newParent.children.length !== 1) {
+      el.parentNode?.removeChild(el);
+    } else {
+      el.parentNode?.replaceChild(newParent, el);
+    }
+  });
+}
+
 export function wrap(classname: string, selectors: string | string[], root: HTMLElement): void {
   if (!Array.isArray(selectors)) {
     selectors = [selectors];
@@ -75,4 +86,31 @@ export function getElementContent(element: Element, selector: string): string | 
 
 export function getElementAttribute(element: Element, selector: string, attribute: string): string | undefined {
   return element.querySelector(selector)?.attributes.getNamedItem(attribute)?.value;
+}
+
+export function loadScript(url: string, type = 'text/javascript'): Promise<void> {
+  return new Promise(function (resolve) {
+    const head = document.querySelector('head');
+    if (head) {
+      const script = createElement('script', { src: url }) as HTMLScriptElement;
+      script.async = true;
+      if (type) {
+        script.type = type;
+      }
+      head.append(script);
+      script.onload = function () {
+        resolve();
+      };
+    }
+  });
+}
+
+export function wrapSections(selector: string): void {
+  document.querySelectorAll(selector).forEach(($div) => {
+    if (!$div.id) {
+      $div.classList.add('container');
+      $div.classList.add('section');
+      $div.classList.add('is-max-widescreen');
+    }
+  });
 }
