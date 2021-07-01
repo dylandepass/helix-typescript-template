@@ -9,12 +9,26 @@
 @import 'bulma/sass/helpers/spacing.sass';
 
 body {
+  @extend .is-dark-blue;
   font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
   opacity: 0;
+  color: #ffffff;
 }
 
 body.appear {
   opacity: 1;
+}
+
+.is-light-blue {
+  background-color: #202131;
+}
+
+.is-dark-blue {
+  background-color: #12122a;
+}
+
+.is-highlight {
+  background-color: #f4b942;
 }

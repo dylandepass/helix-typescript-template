@@ -57,6 +57,17 @@ export function wrapNodes(newParent: HTMLElement, nodes: NodeListOf<Element>): v
   });
 }
 
+export function wrapElements(newParent: HTMLElement, elements: Element[]): void {
+  elements.forEach((el) => {
+    newParent.appendChild(el.cloneNode(true));
+    if (newParent.children.length !== 1) {
+      el.parentNode?.removeChild(el);
+    } else {
+      el.parentNode?.replaceChild(newParent, el);
+    }
+  });
+}
+
 export function wrap(classname: string, selectors: string | string[], root: HTMLElement): void {
   if (!Array.isArray(selectors)) {
     selectors = [selectors];
@@ -99,6 +110,7 @@ export function wrapSections(selector: string): void {
     if (!$div.id) {
       $div.classList.add('container');
       $div.classList.add('section');
+      $div.classList.add('is-max-widescreen');
     }
   });
 }
