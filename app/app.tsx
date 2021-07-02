@@ -21,7 +21,7 @@ function decorateTemplate() {
       const template = templateElement?.textContent;
       console.log(`template ${template}`);
       loadScript(`/build/${template}-bundle.js`);
-      loadCSS(`${template}.css`);
+      loadCSS(`/build/${template}.css`);
       templateElement.remove();
     }
   }

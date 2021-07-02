@@ -13,6 +13,7 @@ const webpackConfig = (env: Environment): Configuration => ({
   mode: env.production || !env.development ? 'production' : 'development',
   ...(env.production || !env.development ? {} : { devtool: 'source-map' }),
   optimization: {
+    runtimeChunk: 'single',
     splitChunks: {
       cacheGroups: {
         styles: {
