@@ -19,11 +19,8 @@ export function decorate(
   columnModifiers?: ElementModifier[]
 ): Element[] {
   const rows: Element[] = [];
-  const blockClasses = block.classList.value;
-  block.removeAttribute('class');
   for (const row of Object.values(block.children)) {
     row.classList.add('columns');
-    row.classList.add(blockClasses);
     if (rowModifier) {
       applyElementModifier(row, rowModifier);
     }
