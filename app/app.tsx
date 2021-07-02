@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import { loadScript } from './dom';
+import { loadCSS, loadScript } from './dom';
 import './styles/styles.scss';
 
 function decorateTemplate() {
@@ -21,6 +21,7 @@ function decorateTemplate() {
       const template = templateElement?.textContent;
       console.log(`template ${template}`);
       loadScript(`/build/${template}-bundle.js`);
+      loadCSS(`${template}.css`);
       templateElement.remove();
     }
   }
