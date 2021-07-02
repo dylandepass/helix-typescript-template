@@ -23,6 +23,7 @@ jobs:
       run: | 
         yarn
         rm .gitignore
+        rm -r /build/*
     - name: Lint
       run: yarn lint
     - name: Build project
