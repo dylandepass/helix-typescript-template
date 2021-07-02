@@ -89,7 +89,7 @@ export function getElementAttribute(element: Element, selector: string, attribut
 }
 
 export function loadScript(url: string, type = 'text/javascript'): Promise<void> {
-  return new Promise(function (resolve) {
+  return new Promise(function (resolve, reject) {
     const head = document.querySelector('head');
     if (head) {
       const script = createElement('script', { src: url }) as HTMLScriptElement;
@@ -101,6 +101,26 @@ export function loadScript(url: string, type = 'text/javascript'): Promise<void>
       script.onload = function () {
         resolve();
       };
+      script.onerror = function () {
+        reject();
+      };
+    }
+  });
+}
+
+export function loadCSS(href: string): Promise<void> {
+  return new Promise(function (resolve, reject) {
+    if (!document.querySelector(`head > link[href="${href}"]`)) {
+      const link = document.createElement('link');
+      link.setAttribute('rel', 'stylesheet');
+      link.setAttribute('href', href);
+      link.onload = () => {
+        resolve();
+      };
+      link.onerror = () => {
+        reject();
+      };
+      document.head.appendChild(link);
     }
   });
 }
