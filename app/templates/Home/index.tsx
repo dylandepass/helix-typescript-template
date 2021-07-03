@@ -11,6 +11,7 @@
  */
 
 import { decorate as decorateColumns } from '../../blocks/Columns';
+import { decorate as decorateNav } from '../../blocks/Nav';
 import { decorate as decorateHero } from '../../blocks/Hero';
 import { decorate as decorateSwiper } from '../../blocks/Swiper';
 import { wrapSections } from '../../dom';
@@ -19,6 +20,12 @@ import './styles.scss';
 function decoratePage() {
   const main = document.querySelector('main');
   if (main) {
+    //Decorate nav
+    const headerBlock = document.querySelector('header');
+    if (headerBlock && headerBlock.parentElement) {
+      decorateNav(headerBlock, headerBlock.parentElement);
+    }
+
     //Decorate hero block
     const heroBlock = document.querySelector('main > div:first-of-type');
     if (heroBlock && heroBlock.parentElement) {

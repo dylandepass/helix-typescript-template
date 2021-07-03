@@ -25,13 +25,15 @@ export function createElement(name: string, attrs?: Record<string, string>): HTM
   return el;
 }
 
-export function applyElementModifier(element: Element, modifier: ElementModifier): void {
+export function applyElementModifier(element: Element, modifier: ElementModifier): Element {
   if (modifier.classes) {
     addElementClasses(element, modifier.classes);
   }
   if (modifier.attributes) {
     addElementAttributes(element, modifier.attributes);
   }
+
+  return element;
 }
 
 export function addElementClasses(element: Element, classes: string[]): void {
