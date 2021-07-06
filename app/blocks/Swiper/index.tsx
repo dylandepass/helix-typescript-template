@@ -12,20 +12,18 @@
 
 import { CommonDOMRenderer } from 'render-jsx/dom';
 import Swiper, { Navigation, Pagination } from 'swiper';
-import './style.scss';
+import { applyElementModifier, ElementModifier } from '../../dom';
+import './style.css';
 
 // configure Swiper to use modules
 Swiper.use([Navigation, Pagination]);
 
-function createSwiper(renderer: CommonDOMRenderer, slides: Element[], slideDecorator?: (slide: Element) => void): Node {
+function createSwiper(renderer: CommonDOMRenderer, slides: Element[]): Node {
   return (
-    <section class="swiper-container">
+    <section class="swiper-container container mx-auto relative z-10 overflow-hidden list-none">
       <div class="swiper-wrapper">
         {slides.map((slide: Element) => {
-          if (slideDecorator) {
-            slideDecorator(slide);
-          }
-          return <div class="swiper-slide">{slide}</div>;
+          return <div class="swiper-slide flex justify-center items-center text-center text-lg">{slide}</div>;
         })}
       </div>
       <div class="swiper-pagination"></div>
@@ -33,11 +31,14 @@ function createSwiper(renderer: CommonDOMRenderer, slides: Element[], slideDecor
   );
 }
 
-export function decorate(block: Element, parent: Element, slideDecorator?: (slide: Element) => void): void {
+export function decorate(block: Element, parent: Element, modifier?: ElementModifier): void {
   const renderer = new CommonDOMRenderer();
   if (parent.previousElementSibling) {
     parent.classList.add('swiper');
-    const heroTemplate = createSwiper(renderer, Object.values(block.children), slideDecorator);
+    const heroTemplate = createSwiper(renderer, Object.values(block.children));
+    if (modifier) {
+      applyElementModifier(heroTemplate as Element, modifier);
+    }
     renderer.render(heroTemplate).after(parent.previousElementSibling);
     new Swiper('.swiper-container', {
       pagination: {

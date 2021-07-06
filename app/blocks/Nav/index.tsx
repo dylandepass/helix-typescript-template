@@ -12,36 +12,41 @@
 
 import { CommonDOMRenderer } from 'render-jsx/dom';
 import { applyElementModifier } from '../../dom';
-import './style.scss';
 
-function createNav(renderer: CommonDOMRenderer, leftMenu: Element[], rightMenu: Element[]): Node {
+function createNav(renderer: CommonDOMRenderer, title?: string, leftMenu?: Element[], rightMenu?: Element[]): Node {
   return (
-    <nav class="navbar is-fixed-top">
-      <div class="container">
-        <div id="navMenu" class="navbar-menu">
-          <div class="navbar-start">
-            {leftMenu.map((link) => {
-              return applyElementModifier(link, { classes: ['navbar-item'] });
-            })}
-          </div>
-
-          <div class="navbar-end">
-            {rightMenu.map((link) => {
-              return applyElementModifier(link, { classes: ['navbar-item'] });
-            })}
+    <header class="flex">
+      <nav class="w-full md:mx-auto fixed py-7 header-text-color header-background-color z-40">
+        <div class="lg:container md:mx-auto">
+          <div class="text-center flex column justify-left lg:justify-center gap-16 items-center ml-6 lg:ml-0">
+            <div class=" hidden lg:block">
+              {leftMenu?.map((link) => {
+                return applyElementModifier(link, { classes: ['text-sm', 'uppercase', 'p-5'] });
+              })}
+            </div>
+            <h1 class="text-2xl">{title}</h1>
+            <div class="hidden lg:block">
+              {rightMenu?.map((link) => {
+                return applyElementModifier(link, { classes: ['text-sm', 'uppercase', 'p-5'] });
+              })}
+            </div>
           </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+      <button class="inline-block z-50 ml-auto mr-5 lg:hidden lg:hidden py-7">
+        <img src="/icons/hamburger.svg" />
+      </button>
+    </header>
   );
 }
 
 export function decorate(block: Element, parent: Element): void {
   const leftMenu = block.querySelector('div:first-of-type p');
   const rightMenu = block.querySelector('div:nth-of-type(3) p');
+  const title = block.querySelector('div:nth-of-type(2) p')?.textContent;
   const renderer = new CommonDOMRenderer();
-  if (leftMenu && rightMenu) {
-    const navTemplate = createNav(renderer, Array.from(leftMenu.children), Array.from(rightMenu.children));
+  if (title && leftMenu && rightMenu) {
+    const navTemplate = createNav(renderer, title, Array.from(leftMenu.children), Array.from(rightMenu.children));
     renderer.render(navTemplate).before(block);
     block.remove();
   }

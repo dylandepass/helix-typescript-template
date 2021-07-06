@@ -1,8 +1,8 @@
-## DYLAN DEPASS
+## TEMPLATE
 
-### Are You Ready to Work with Me? Don't be Shy, Say Hello!
+### Are You Ready to try it? Don't be Shy, Clone Me!
 
-- dylan@example.com
+- template@example.com
 - +44 (123) 456 78 90
 
 <hr>

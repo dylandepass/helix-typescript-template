@@ -1,0 +1,7 @@
+.responsive-row {
+  @apply flex flex-col md:flex-row lg:flex-row;
+}
+
+.responsive-col {
+  @apply w-full;
+}

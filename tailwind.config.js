@@ -10,16 +10,22 @@
  * governing permissions and limitations under the License.
  */
 
-import './styles.css';
-
-function decoratePage() {
-  document.body.classList.add('appear');
-}
-
-if (document.readyState == 'loading') {
-  window.addEventListener('DOMContentLoaded', () => {
-    decoratePage();
-  });
-} else {
-  decoratePage();
-}
+module.exports = {
+  purge: [],
+  darkMode: false, // or 'media' or 'class'
+  theme: {
+    extend: {
+      fontSize: {
+        '8xl': '6.7rem',
+        '12xl': '11rem'
+      },
+      container: {
+        screens: {
+          xl: '1140px'
+        }
+      }
+    }
+  },
+  variants: {},
+  plugins: []
+};
