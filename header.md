@@ -1,4 +1,4 @@
-[Home2](https://google.com)
+[Home](https://google.com)
 [Blog](https://google.com)
 [Services](https://google.com)
 
