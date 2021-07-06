@@ -4,7 +4,7 @@
 
 ---
 
-HELIX TEMPLATE
+TEMPLATE
 
 ---
 

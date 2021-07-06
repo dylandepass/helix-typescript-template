@@ -1,14 +1,6 @@
-.swiper-container {
-  height: 500px;
-}
-
 .swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #f4b942;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: var(--theme-color);
+  color: #202131;
 }
 
 /*! purgecss start ignore */
@@ -34,16 +26,17 @@
 :root {
   --swiper-theme-color: #007aff;
 }
-.swiper-container {
+/* .swiper-container {
   margin-left: auto;
   margin-right: auto;
   position: relative;
   overflow: hidden;
   list-style: none;
   padding: 0;
-  /* Fix of Webkit flickering */
+  //Fix of Webkit flickering
   z-index: 1;
 }
+*/
 .swiper-container-vertical > .swiper-wrapper {
   flex-direction: column;
 }

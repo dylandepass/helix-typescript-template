@@ -1,8 +1,6 @@
 import path from 'path';
-import glob from 'glob';
 import webpack, { Configuration } from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import PurgecssPlugin from 'purgecss-webpack-plugin';
 
 interface Environment {
   development?: boolean;
@@ -13,17 +11,7 @@ const webpackConfig = (env: Environment): Configuration => ({
   mode: env.production || !env.development ? 'production' : 'development',
   ...(env.production || !env.development ? {} : { devtool: 'source-map' }),
   optimization: {
-    runtimeChunk: 'single',
-    splitChunks: {
-      cacheGroups: {
-        styles: {
-          name: 'styles',
-          test: /\.css$/,
-          chunks: 'all',
-          enforce: true
-        }
-      }
-    }
+    runtimeChunk: 'single'
   },
   entry: {
     app: {
@@ -51,16 +39,7 @@ const webpackConfig = (env: Environment): Configuration => ({
   },
   module: {
     rules: [
-      {
-        test: /\.(sa|sc|c)ss$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          // Translates CSS into CommonJS
-          'css-loader',
-          // Compiles Sass to CSS
-          'sass-loader'
-        ]
-      },
+      { test: /\.css$/i, use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'] },
       {
         test: /\.html$/i,
         loader: 'html-loader'
@@ -73,9 +52,6 @@ const webpackConfig = (env: Environment): Configuration => ({
     new MiniCssExtractPlugin({
       filename: '[name].css'
     }) as any,
-    new PurgecssPlugin({
-      paths: glob.sync(`${path.join(__dirname, 'app')}/**/*`, { nodir: true })
-    }),
     new webpack.DefinePlugin({
       'process.env.PRODUCTION': env.production || !env.development,
       'process.env.NAME': JSON.stringify(require('./package.json').name),
