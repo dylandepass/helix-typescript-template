@@ -1,6 +1,6 @@
-[Home](https://google.com)
-[Blog](https://google.com)
-[Services](https://google.com)
+[Home](/)
+[Blog](/blog)
+[Services](/services)
 
 ---
 
@@ -8,6 +8,6 @@ TEMPLATE
 
 ---
 
-[Portfolio](https://google.com)
-[About](https://google.com)
-[Contacts](https://google.com)
+[Portfolio](/portfolio)
+[About](/about)
+[Contacts](/contacts)
