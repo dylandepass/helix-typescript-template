@@ -39,13 +39,16 @@ const webpackConfig = (env: Environment): Configuration => ({
   },
   module: {
     rules: [
-      { test: /\.css$/i, use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'] },
       {
         test: /\.html$/i,
         loader: 'html-loader'
       },
       // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
-      { test: /\.tsx?$/, loader: 'ts-loader' }
+      { test: /\.tsx?$/, loader: 'ts-loader' },
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, { loader: 'css-loader', options: { url: false } }, 'postcss-loader']
+      }
     ]
   },
   plugins: [
