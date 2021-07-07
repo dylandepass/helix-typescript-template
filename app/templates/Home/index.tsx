@@ -81,15 +81,27 @@ function decoratePage() {
           childModifiers: [
             {
               selector: 'p:first-of-type',
-              modifier: { classes: ['secondary-font', 'uppercase', 'leading-6', 'pb-4', 'text-center', 'lg:text-left'] }
+              modifier: {
+                classes: [
+                  'secondary-font',
+                  'uppercase',
+                  'leading-6',
+                  'pb-4',
+                  'text-center',
+                  'md:text-left',
+                  'lg:text-left'
+                ]
+              }
             },
             {
               selector: 'p:nth-of-type(2)',
-              modifier: { classes: ['font-light', 'pb-8', 'text-center', 'lg:text-left'] }
+              modifier: { classes: ['font-light', 'pb-8', 'text-center', 'md:text-left', 'lg:text-left'] }
             },
             {
               selector: 'img',
-              modifier: { classes: ['mx-auto', 'w-14', 'h-14', 'm-10', 'lg:w-7', 'lg:h-7', 'lg:m-0'] }
+              modifier: {
+                classes: ['mx-auto', 'w-14', 'h-14', 'm-10', 'md:m-0', 'md:w-7', 'md:h-7', 'lg:w-7', 'lg:h-7', 'lg:m-0']
+              }
             }
           ]
         },

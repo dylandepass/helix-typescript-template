@@ -10,9 +10,12 @@
  * governing permissions and limitations under the License.
  */
 
+/* eslint-disable no-undef */
 module.exports = {
-  purge: [],
-  darkMode: false, // or 'media' or 'class'
+  purge: {
+    enabled: process.env.NODE_ENV === 'production',
+    content: ['./app/**/*.html', './app/**/*.tsx', './app/**/*.ts']
+  },
   theme: {
     extend: {
       fontSize: {

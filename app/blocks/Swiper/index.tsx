@@ -11,12 +11,10 @@
  */
 
 import { CommonDOMRenderer } from 'render-jsx/dom';
-import Swiper, { Navigation, Pagination } from 'swiper';
+//import Swiper, { Navigation, Pagination } from 'swiper';
 import { applyElementModifier, ElementModifier } from '../../dom';
 import './style.css';
-
-// configure Swiper to use modules
-Swiper.use([Navigation, Pagination]);
+import Flickity from 'flickity';
 
 function createSwiper(renderer: CommonDOMRenderer, slides: Element[]): Node {
   return (
@@ -40,10 +38,9 @@ export function decorate(block: Element, parent: Element, modifier?: ElementModi
       applyElementModifier(heroTemplate as Element, modifier);
     }
     renderer.render(heroTemplate).after(parent.previousElementSibling);
-    new Swiper('.swiper-container', {
-      pagination: {
-        el: '.swiper-pagination'
-      }
+
+    new Flickity('.swiper-wrapper', {
+      wrapAround: true
     });
     block.remove();
   }

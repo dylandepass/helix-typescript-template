@@ -7,7 +7,8 @@
 
 <hr>
 
-- [Home]('https://google.com')
-- [Services]('https://google.com')
-- [Portfolio]('https://google.com')
-- [Contacts]('https://google.com')
+- [Home]('/')
+- [Blog]('/blog')
+- [Services]('/services')
+- [Portfolio]('/portfolio')
+- [Contacts]('/contacts')
