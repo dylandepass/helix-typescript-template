@@ -11,7 +11,7 @@
  */
 
 import { applyElementModifier, createElement, ElementModifier, wrapElements } from '../../dom';
-import './style.scss';
+import './style.css';
 
 export function decorate(
   block: Element,
@@ -19,11 +19,8 @@ export function decorate(
   columnModifiers?: ElementModifier[]
 ): Element[] {
   const rows: Element[] = [];
-  const blockClasses = block.classList.value;
-  block.removeAttribute('class');
   for (const row of Object.values(block.children)) {
-    row.classList.add('columns');
-    row.classList.add(blockClasses);
+    row.classList.add('flex');
     if (rowModifier) {
       applyElementModifier(row, rowModifier);
     }

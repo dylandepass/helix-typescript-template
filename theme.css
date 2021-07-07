@@ -1,0 +1,57 @@
+:root {
+  /* THEME */
+  --theme-color: #f4b942;
+  --background-color: #f1f1f1;
+  --header-background-color: #000000;
+  --footer-background-color: #333333;
+  --line-color: #cccccc;
+  --separator-color: #cccccc;
+
+  /* TEXT */
+  --font-family: 'Roboto', sans-serif;
+  --font-color: #333333;
+  --secondary-font-family: 'Josefin Sans', sans-serif;
+  --secondary-font-color: #202131;
+  --header-text-color: #ffffff;
+  --footer-text-color: #ffffff;
+  --text-highlight-color: #f4b942;
+
+  /* HERO */
+  --hero-text-color: #ffffff;
+
+  /* CARDS */
+  --card-1-background-color: #a3a3a5;
+  --card-1-text-color: #ffffff;
+  --card-2-background-color: #f4b942;
+  --card-2-text-color: #202131;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* THEME */
+    --theme-color: #f4b942;
+    --background-color: #12122a;
+    --header-background-color: #12122a;
+    --footer-background-color: #202131;
+    --line-color: #303144;
+    --separator-color: #303144;
+
+    /* TEXT */
+    --font-family: 'Roboto', sans-serif;
+    --font-color: #ffffff;
+    --secondary-font-family: 'Josefin Sans', sans-serif;
+    --secondary-font-color: #202131;
+    --header-text-color: #ffffff;
+    --footer-text-color: #ffffff;
+    --text-highlight-color: #f4b942;
+
+    /* HERO */
+    --hero-text-color: #ffffff;
+
+    /* CARDS */
+    --card-1-background-color: #202131;
+    --card-1-text-color: #ffffff;
+    --card-2-background-color: #f4b942;
+    --card-2-text-color: #202131;
+  }
+}

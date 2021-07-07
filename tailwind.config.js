@@ -10,16 +10,25 @@
  * governing permissions and limitations under the License.
  */
 
-import './styles.css';
-
-function decoratePage() {
-  document.body.classList.add('appear');
-}
-
-if (document.readyState == 'loading') {
-  window.addEventListener('DOMContentLoaded', () => {
-    decoratePage();
-  });
-} else {
-  decoratePage();
-}
+/* eslint-disable no-undef */
+module.exports = {
+  purge: {
+    enabled: process.env.NODE_ENV === 'production',
+    content: ['./app/**/*.html', './app/**/*.tsx', './app/**/*.ts']
+  },
+  theme: {
+    extend: {
+      fontSize: {
+        '8xl': '6.7rem',
+        '12xl': '11rem'
+      },
+      container: {
+        screens: {
+          xl: '1140px'
+        }
+      }
+    }
+  },
+  variants: {},
+  plugins: []
+};

@@ -10,19 +10,60 @@
  * governing permissions and limitations under the License.
  */
 
-import { loadCSS, loadScript } from './dom';
-import './styles/styles.scss';
+import { applyElementModifier, loadTemplate } from './dom';
+import { decorate as decorateNav } from './blocks/Nav';
+import './styles/styles.css';
 
 function decorateTemplate() {
   const main = document.querySelector('main');
   if (main) {
-    const templateElement = document.querySelector('.template');
-    if (templateElement) {
-      const template = templateElement?.textContent;
-      console.log(`template ${template}`);
-      loadScript(`/build/${template}-bundle.js`);
-      loadCSS(`${template}.css`);
-      templateElement.remove();
+    loadTemplate();
+
+    //Decorate nav
+    const headerBlock = document.querySelector('header');
+    if (headerBlock && headerBlock.parentElement) {
+      decorateNav(headerBlock, headerBlock.parentElement);
+    }
+
+    const footerBlock = document.querySelector('footer');
+    if (footerBlock) {
+      applyElementModifier(footerBlock, {
+        classes: ['text-center', 'pt-32', 'footer-text-color'],
+        childModifiers: [
+          {
+            selector: 'h2',
+            modifier: { classes: ['text-2xl'] }
+          },
+          {
+            selector: 'h3',
+            modifier: { classes: ['text-2xl', 'font-bold', 'py-10', 'max-w-sm', 'mx-auto'] }
+          },
+          {
+            selector: 'ul:first-of-type',
+            modifier: { classes: ['flex', 'gap-10', 'mb-20', 'justify-center', 'text-lg', 'font-light'] }
+          },
+          {
+            selector: 'ul:first-of-type li:first-of-type',
+            validation: (element: Element) => {
+              const regex = /^\S+@\S+\.\S+$/;
+              const email = element.textContent;
+              if (email) {
+                const match = email.match(regex);
+                if (match) return match.length > 0;
+              }
+              return false;
+            }
+          },
+          {
+            selector: 'hr',
+            modifier: { classes: ['border-b', 'border-gray-800'] }
+          },
+          {
+            selector: 'ul:nth-of-type(2)',
+            modifier: { classes: ['text-sm', 'uppercase', 'p-10', 'flex', 'gap-10'] }
+          }
+        ]
+      });
     }
   }
 }

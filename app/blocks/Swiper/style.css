@@ -1,0 +1,8 @@
+@import '~flickity/dist/flickity.min.css';
+
+.swiper-slide {
+  background: var(--theme-color);
+  color: #202131;
+  width: 100%;
+  height: auto;
+}

@@ -9,9 +9,28 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+
+export interface ChildElementModifier {
+  selector: string;
+  modifier?: ElementModifier;
+  validation?: (element: Element) => boolean;
+}
+
 export interface ElementModifier {
   classes?: string[];
   attributes?: Record<string, string>;
+  childModifiers?: ChildElementModifier[];
+}
+
+export function loadTemplate(): void {
+  const templateElement = document.querySelector('.template');
+  if (templateElement) {
+    const template = templateElement?.textContent;
+    console.log(`template ${template}`);
+    loadScript(`/build/${template}-bundle.js`);
+    loadCSS(`/build/${template}.css`);
+    templateElement.remove();
+  }
 }
 
 export function createElement(name: string, attrs?: Record<string, string>): HTMLElement {
@@ -25,13 +44,40 @@ export function createElement(name: string, attrs?: Record<string, string>): HTM
   return el;
 }
 
-export function applyElementModifier(element: Element, modifier: ElementModifier): void {
-  if (modifier.classes) {
-    addElementClasses(element, modifier.classes);
+export function applyElementModifier(element: Element, modifier: ElementModifier): Element {
+  const { classes, attributes, childModifiers } = modifier;
+  if (classes) {
+    addElementClasses(element, classes);
   }
-  if (modifier.attributes) {
-    addElementAttributes(element, modifier.attributes);
+  if (attributes) {
+    addElementAttributes(element, attributes);
   }
+
+  if (childModifiers) {
+    for (const childModifier of childModifiers) {
+      applyChildElementModifier(element, childModifier);
+    }
+  }
+
+  return element;
+}
+
+export function applyChildElementModifier(element: Element, childModifier: ChildElementModifier): Element | null {
+  const { selector, modifier, validation } = childModifier;
+  const childElements = element.querySelectorAll(selector);
+  for (const childElement of Array.from(childElements)) {
+    if (childElement) {
+      if (modifier) applyElementModifier(childElement, modifier);
+
+      if (validation) {
+        if (!validation(childElement)) {
+          childElement.remove();
+        }
+      }
+    }
+  }
+
+  return element;
 }
 
 export function addElementClasses(element: Element, classes: string[]): void {
@@ -126,11 +172,9 @@ export function loadCSS(href: string): Promise<void> {
 }
 
 export function wrapSections(selector: string): void {
-  document.querySelectorAll(selector).forEach(($div) => {
-    if (!$div.id) {
-      $div.classList.add('container');
-      $div.classList.add('section');
-      $div.classList.add('is-max-widescreen');
+  document.querySelectorAll(selector).forEach((element) => {
+    if (!element.id) {
+      addElementClasses(element, ['container', 'md:mx-auto', 'section', 'p-10']);
     }
   });
 }

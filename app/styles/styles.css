@@ -1,0 +1,86 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+body {
+  font-family: var(--font-family);
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  color: var(--font-color);
+  background-color: var(--background-color);
+  -webkit-font-smoothing: antialiased;
+}
+
+body.appear {
+  opacity: 1;
+}
+
+.section {
+  @apply p-12;
+}
+
+.header-background-color {
+  background-color: var(--header-background-color);
+}
+
+.header-text-color {
+  color: var(--header-text-color);
+}
+
+.hero-background-color {
+  background-color: var(--hero-background-color);
+}
+
+.hero-text-color {
+  color: var(--hero-text-color);
+}
+
+.theme-background {
+  background-color: var(--theme-color);
+}
+
+.card-1-background-color {
+  background-color: var(--card-1-background-color);
+}
+
+.card-1-text-color {
+  color: var(--card-1-text-color);
+}
+
+.card-2-background-color {
+  background-color: var(--card-2-background-color);
+}
+
+.card-2-text-color {
+  color: var(--card-2-text-color);
+}
+
+.resume-separator-color {
+  border-color: var(--separator-color);
+}
+
+.about-hr {
+  border-color: #f4b942;
+}
+
+.secondary-font {
+  font-family: var(--secondary-font-family);
+}
+
+.secondary-font-color {
+  color: var(--secondary-font-color);
+}
+
+header a:hover,
+footer a:hover {
+  color: var(--text-highlight-color);
+}
+
+footer {
+  background-color: var(--footer-background-color);
+}
+
+.footer-text-color {
+  color: var(--footer-text-color);
+}
