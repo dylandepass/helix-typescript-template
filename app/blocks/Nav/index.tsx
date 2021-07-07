@@ -17,7 +17,7 @@ function createNav(renderer: CommonDOMRenderer, title?: string, leftMenu?: Eleme
   return (
     <header class="flex">
       <nav class="w-full md:mx-auto fixed py-7 header-text-color header-background-color z-40">
-        <div class="lg:container md:mx-auto">
+        <div class="lg:container md:mx-auto pl-11">
           <div class="text-center flex column justify-left lg:justify-center gap-16 items-center ml-6 lg:ml-0">
             <div class=" hidden lg:block">
               {leftMenu?.map((link) => {
