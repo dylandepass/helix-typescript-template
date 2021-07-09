@@ -178,3 +178,29 @@ export function wrapSections(selector: string): void {
     }
   });
 }
+
+export function onElementVisible(
+  element: Element,
+  selector: string,
+  action: (index: number, element: Element) => void
+): void {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      if (entries[0].isIntersecting) {
+        const elements = Array.from(element.querySelectorAll(selector));
+        for (const [index, element] of elements.entries()) {
+          if (action) {
+            action(index, element);
+          }
+        }
+        observer.disconnect();
+      }
+    },
+    { threshold: [0] }
+  );
+
+  const el = element.querySelector(selector);
+  if (el) {
+    observer.observe(el);
+  }
+}

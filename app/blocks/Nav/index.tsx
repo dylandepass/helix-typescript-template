@@ -18,13 +18,13 @@ function createNav(renderer: CommonDOMRenderer, title?: string, leftMenu?: Eleme
     <header class="flex">
       <nav class="w-full md:mx-auto fixed py-7 header-text-color header-background-color z-40">
         <div class="lg:container md:mx-auto pl-11">
-          <div class="text-center flex column justify-left lg:justify-center gap-16 items-center ml-6 lg:ml-0">
+          <div class="text-center flex column justify-left lg:justify-center gap-16 items-center lg:ml-0">
             <div class=" hidden lg:block">
               {leftMenu?.map((link) => {
                 return applyElementModifier(link, { classes: ['text-sm', 'uppercase', 'p-5'] });
               })}
             </div>
-            <h1 class="text-2xl">{title}</h1>
+            <h1 class="text-2xl mx-38">{title}</h1>
             <div class="hidden lg:block">
               {rightMenu?.map((link) => {
                 return applyElementModifier(link, { classes: ['text-sm', 'uppercase', 'p-5'] });

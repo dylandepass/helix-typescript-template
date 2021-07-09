@@ -26,6 +26,18 @@ const webpackConfig = (env: Environment): Configuration => ({
       import: './app/templates/About/index.tsx',
       dependOn: 'shared'
     },
+    blog: {
+      import: './app/templates/Blog/index.tsx',
+      dependOn: 'shared'
+    },
+    post: {
+      import: './app/templates/Post/index.tsx',
+      dependOn: 'shared'
+    },
+    contacts: {
+      import: './app/templates/Contacts/index.tsx',
+      dependOn: 'shared'
+    },
     shared: ['render-jsx']
   },
   watch: env.production || !env.development ? false : true,
