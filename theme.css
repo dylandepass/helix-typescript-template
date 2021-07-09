@@ -24,6 +24,8 @@
   --card-1-text-color: #ffffff;
   --card-2-background-color: #f4b942;
   --card-2-text-color: #202131;
+  --4-card-background-color: #202131;
+  --4-card-text-color: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -53,5 +55,7 @@
     --card-1-text-color: #ffffff;
     --card-2-background-color: #f4b942;
     --card-2-text-color: #202131;
+    --4-card-background-color: #202131;
+    --4-card-text-color: #ffffff;
   }
 }

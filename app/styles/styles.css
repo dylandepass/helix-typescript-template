@@ -56,6 +56,14 @@ body.appear {
   color: var(--card-2-text-color);
 }
 
+.four-card-background-color {
+  background-color: var(--4-card-background-color);
+}
+
+.four-card-text-color {
+  color: var(--4-card-text-color);
+}
+
 .resume-separator-color {
   border-color: var(--separator-color);
 }
@@ -83,4 +91,8 @@ footer {
 
 .footer-text-color {
   color: var(--footer-text-color);
+}
+
+.text-input-background-color {
+  background-color: var(--footer-background-color);
 }
