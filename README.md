@@ -123,7 +123,9 @@ A great [Cheat Sheet](https://nerdcave.com/tailwind-cheat-sheet) is available fo
 
 ### 🧑🏻‍💻 Declarative code > imperative code
 
-There will be places where DOM manipulation in a way where the provided utility functions fall short. For this we want to still avoid using imperative DOM manipulation code and instead use declarative code in the form of JSX. In the end JSX is transpiled into DOM calls but has many advantages including being less verbose then javascript, easier to write, easy to create re-usable components and the ability to embed one component in another.
+There will be places where DOM manipulation in a way where the provided utility functions fall short. For this we want to still avoid using imperative DOM manipulation code and instead use declarative code in the form of JSX. In the end JSX is transpiled into DOM calls but it has many advantages over the DOM API including being less verbose then javascript, easier to write, easier to create re-usable components and the ability to embed one component in another.
+
+The [Nav](https://github.com/dylandepass/helix-typescript-template/blob/dev/app/blocks/Nav/index.tsx) component is a good example of one where JSX is a better choice over the utility functions for styling.
 
 ### 📦 Limited dependencies and small bundle sizes
 
