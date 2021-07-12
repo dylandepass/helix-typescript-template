@@ -10,34 +10,38 @@
  * governing permissions and limitations under the License.
  */
 
+import { resolveElement } from '../../dom';
 import { decorate as decorateColumns } from '../Columns';
 
-export function decorate(block: Element): void {
-  decorateColumns(
-    block,
-    {
-      classes: ['responsive-row', 'gap-10', 'is-6', 'text-center'],
-      childModifiers: [
+export function decorate(elementOrSelector: Element | string): void {
+  const element = resolveElement(elementOrSelector);
+  if (element) {
+    decorateColumns(
+      element,
+      {
+        classes: ['responsive-row', 'gap-10', 'is-6', 'text-center'],
+        childModifiers: [
+          {
+            selector: 'img',
+            modifier: { classes: ['mb-12', 'mx-auto', 'w-10/12'] }
+          },
+          {
+            selector: 'div h3',
+            modifier: { classes: ['secondary-font', 'font-light', 'text-base', 'uppercase', 'mb-8'] }
+          }
+        ]
+      },
+      [
         {
-          selector: 'img',
-          modifier: { classes: ['mb-12', 'mx-auto', 'w-10/12'] }
+          classes: ['responsive-col', 'p-6', 'card-1-background-color', 'card-1-text-color', 'opacity-0']
         },
         {
-          selector: 'div h3',
-          modifier: { classes: ['secondary-font', 'font-light', 'text-base', 'uppercase', 'mb-8'] }
+          classes: ['responsive-col', 'p-6', 'card-2-background-color', 'card-2-text-color', 'opacity-0']
+        },
+        {
+          classes: ['responsive-col', 'p-6', 'card-1-background-color', 'card-1-text-color', 'opacity-0']
         }
       ]
-    },
-    [
-      {
-        classes: ['responsive-col', 'p-6', 'card-1-background-color', 'card-1-text-color', 'opacity-0']
-      },
-      {
-        classes: ['responsive-col', 'p-6', 'card-2-background-color', 'card-2-text-color', 'opacity-0']
-      },
-      {
-        classes: ['responsive-col', 'p-6', 'card-1-background-color', 'card-1-text-color', 'opacity-0']
-      }
-    ]
-  );
+    );
+  }
 }

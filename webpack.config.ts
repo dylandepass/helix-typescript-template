@@ -1,6 +1,7 @@
 import path from 'path';
 import webpack, { Configuration } from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 
 interface Environment {
   development?: boolean;
@@ -71,7 +72,8 @@ const webpackConfig = (env: Environment): Configuration => ({
       'process.env.PRODUCTION': env.production || !env.development,
       'process.env.NAME': JSON.stringify(require('./package.json').name),
       'process.env.VERSION': JSON.stringify(require('./package.json').version)
-    })
+    }),
+    ...(env.production ? [new CssMinimizerPlugin()] : [])
   ]
 });
 

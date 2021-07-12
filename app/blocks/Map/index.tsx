@@ -11,8 +11,9 @@
  */
 
 import { CommonDOMRenderer } from 'render-jsx/dom';
+import { resolveElement } from '../../dom';
 
-function createMap(renderer: CommonDOMRenderer): Node {
+function createMap(renderer: CommonDOMRenderer): Element {
   return (
     <section class="map">
       <iframe
@@ -24,9 +25,12 @@ function createMap(renderer: CommonDOMRenderer): Node {
   );
 }
 
-export function decorate(block: Element): void {
-  const renderer = new CommonDOMRenderer();
-  const map = createMap(renderer);
-  renderer.render(map).before(block);
-  block.remove();
+export function decorate(elementOrSelector: Element | string): void {
+  const element = resolveElement(elementOrSelector);
+  if (element) {
+    const renderer = new CommonDOMRenderer();
+    const map = createMap(renderer);
+    renderer.render(map).before(element);
+    element.remove();
+  }
 }

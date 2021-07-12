@@ -10,32 +10,35 @@
  * governing permissions and limitations under the License.
  */
 
-import { applyElementModifier } from '../../dom';
+import { decorateElement, resolveElement } from '../../dom';
 
-export function decorate(block: Element): void {
-  applyElementModifier(block, {
-    classes: [
-      'hero',
-      'flex',
-      'flex-col',
-      'bg-black',
-      'bg-opacity-30',
-      'shadow-inner',
-      'min-h-screen',
-      'text-center',
-      'justify-center',
-      'items-center',
-      'hero-text-color'
-    ],
-    childModifiers: [
-      {
-        selector: 'h1',
-        modifier: { classes: ['text-8xl', 'uppercase', 'leading-tight', 'font-extrabold', 'md:text-12xl'] }
-      },
-      {
-        selector: 'h3',
-        modifier: { classes: ['text-4xl', 'font-semibold', 'uppercase', 'md:text-6xl', 'mb-10'] }
-      }
-    ]
-  });
+export function decorate(elementOrSelector: Element | string): void {
+  const element = resolveElement(elementOrSelector);
+  if (element) {
+    decorateElement(element, {
+      classes: [
+        'hero',
+        'flex',
+        'flex-col',
+        'bg-black',
+        'bg-opacity-30',
+        'shadow-inner',
+        'min-h-screen',
+        'text-center',
+        'justify-center',
+        'items-center',
+        'hero-text-color'
+      ],
+      childModifiers: [
+        {
+          selector: 'h1',
+          modifier: { classes: ['text-8xl', 'uppercase', 'leading-tight', 'font-extrabold', 'md:text-12xl'] }
+        },
+        {
+          selector: 'h3',
+          modifier: { classes: ['text-4xl', 'font-semibold', 'uppercase', 'md:text-6xl', 'mb-10'] }
+        }
+      ]
+    });
+  }
 }

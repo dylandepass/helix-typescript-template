@@ -11,6 +11,7 @@
  */
 
 import { CommonDOMRenderer } from 'render-jsx/dom';
+import { resolveElement } from '../../dom';
 
 interface BlogPost {
   title: string;
@@ -23,7 +24,7 @@ interface BlogPost {
 function renderPost(renderer: CommonDOMRenderer, post: BlogPost): Node {
   return (
     <article class="">
-      <div class="mb-7 py-6 px-3 bg-blue-100">
+      <div class="mb-7 py-6 px-3 blog-image-matte-background-color">
         <a href={post.path}>
           <img class="shadow-md h-52 object-cover" src={post.image}></img>
         </a>
@@ -53,15 +54,16 @@ function renderBlogList(renderer: CommonDOMRenderer, posts: BlogPost[]): Node {
   );
 }
 
-export async function decorate(block: Element): Promise<void> {
-  fetch('/posts.json')
-    .then((response) => response.json())
-    .then((body) => {
-      console.log(body.data);
-
-      const renderer = new CommonDOMRenderer();
-      const blogList = renderBlogList(renderer, body.data);
-      renderer.render(blogList).before(block);
-      block.remove();
-    });
+export async function decorate(elementOrSelector: Element | string): Promise<void> {
+  const element = resolveElement(elementOrSelector);
+  if (element) {
+    fetch('/posts.json')
+      .then((response) => response.json())
+      .then((body) => {
+        const renderer = new CommonDOMRenderer();
+        const blogList = renderBlogList(renderer, body.data);
+        renderer.render(blogList).before(element);
+        element.remove();
+      });
+  }
 }

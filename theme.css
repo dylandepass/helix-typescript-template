@@ -20,6 +20,7 @@
   --hero-text-color: #ffffff;
 
   /* CARDS */
+  --blog-image-matte-background-color: #dbeafe;
   --card-1-background-color: #a3a3a5;
   --card-1-text-color: #ffffff;
   --card-2-background-color: #f4b942;
@@ -51,6 +52,7 @@
     --hero-text-color: #ffffff;
 
     /* CARDS */
+    --blog-image-matte-background-color: #dbeafe;
     --card-1-background-color: #202131;
     --card-1-text-color: #ffffff;
     --card-2-background-color: #f4b942;

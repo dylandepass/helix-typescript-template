@@ -10,36 +10,33 @@
  * governing permissions and limitations under the License.
  */
 
-import { wrapSections } from '../../dom';
+import { decorateSections } from '../../dom';
 import { decorate as decorateTwoColumn } from '../../blocks/TwoColumn';
 import { decorate as decorateMap } from '../../blocks/Map';
 
 function decoratePage() {
-  //Decorate about
-  const aboutBlock = document.querySelector('.contacts');
-  if (aboutBlock) {
-    decorateTwoColumn(aboutBlock, {
-      classes: ['responsive-row', 'md:mt-24', 'gap-10', 'md:gap-24', 'mb-24'],
-      childModifiers: [
-        {
-          selector: 'h3',
-          modifier: { classes: ['text-sm', 'mb-6'] }
-        },
-        {
-          selector: 'div:first-of-type > h2',
-          modifier: { classes: ['text-2xl', 'mb-0'] }
-        },
-        {
-          selector: 'p',
-          modifier: { classes: ['mt-6', 'font-light'] }
-        },
-        {
-          selector: 'div:nth-of-type(2) > h2',
-          modifier: { classes: ['text-lg', 'mb-0', 'secondary-font'] }
-        }
-      ]
-    });
-  }
+  //Decorate contacts
+  decorateTwoColumn('.contacts', {
+    classes: ['responsive-row', 'md:mt-24', 'gap-10', 'md:gap-24', 'mb-24'],
+    childModifiers: [
+      {
+        selector: 'h3',
+        modifier: { classes: ['text-sm', 'mb-6'] }
+      },
+      {
+        selector: 'div:first-of-type > h2',
+        modifier: { classes: ['text-2xl', 'mb-0'] }
+      },
+      {
+        selector: 'p',
+        modifier: { classes: ['mt-6', 'font-light'] }
+      },
+      {
+        selector: 'div:nth-of-type(2) > h2',
+        modifier: { classes: ['text-lg', 'mb-0', 'secondary-font'] }
+      }
+    ]
+  });
 
   const mapBlock = document.querySelector('.maps');
   if (mapBlock) {
@@ -47,14 +44,8 @@ function decoratePage() {
     mapBlock;
   }
 
-  wrapSections(`main .contacts`);
+  decorateSections(`main .contacts`);
   document.body.classList.add('appear');
 }
 
-if (document.readyState == 'loading') {
-  window.addEventListener('DOMContentLoaded', () => {
-    decoratePage();
-  });
-} else {
-  decoratePage();
-}
+decoratePage();

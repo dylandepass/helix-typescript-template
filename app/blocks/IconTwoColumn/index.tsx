@@ -10,41 +10,53 @@
  * governing permissions and limitations under the License.
  */
 
+import { resolveElement } from '../../dom';
 import { decorate as decorateColumns } from '../Columns';
 
-export function decorate(block: Element): void {
-  decorateColumns(
-    block,
-    {
-      classes: ['responsive-row'],
-      childModifiers: [
-        {
-          selector: 'p:first-of-type',
-          modifier: {
-            classes: ['secondary-font', 'uppercase', 'leading-6', 'pb-4', 'text-center', 'md:text-left', 'lg:text-left']
+export function decorate(elementOrSelector: Element | string): void {
+  const element = resolveElement(elementOrSelector);
+  if (element) {
+    decorateColumns(
+      element,
+      {
+        classes: ['responsive-row'],
+        childModifiers: [
+          {
+            selector: 'p:first-of-type',
+            modifier: {
+              classes: [
+                'secondary-font',
+                'uppercase',
+                'leading-6',
+                'pb-4',
+                'text-center',
+                'md:text-left',
+                'lg:text-left'
+              ]
+            }
+          },
+          {
+            selector: 'p:nth-of-type(2)',
+            modifier: { classes: ['font-light', 'pb-8', 'text-center', 'md:text-left', 'lg:text-left'] }
+          },
+          {
+            selector: 'img',
+            modifier: {
+              classes: ['mx-auto', 'w-14', 'h-14', 'm-10', 'md:m-0', 'md:w-7', 'md:h-7', 'lg:w-7', 'lg:h-7', 'lg:m-0']
+            }
           }
+        ]
+      },
+      [
+        {
+          classes: ['md:w-12']
         },
         {
-          selector: 'p:nth-of-type(2)',
-          modifier: { classes: ['font-light', 'pb-8', 'text-center', 'md:text-left', 'lg:text-left'] }
+          classes: ['md:w-1/2', 'sm:text-center']
         },
-        {
-          selector: 'img',
-          modifier: {
-            classes: ['mx-auto', 'w-14', 'h-14', 'm-10', 'md:m-0', 'md:w-7', 'md:h-7', 'lg:w-7', 'lg:h-7', 'lg:m-0']
-          }
-        }
+        { classes: ['md:w-12'] },
+        { classes: ['md:w-1/2', 'sm:text-center'] }
       ]
-    },
-    [
-      {
-        classes: ['md:w-12']
-      },
-      {
-        classes: ['md:w-1/2', 'sm:text-center']
-      },
-      { classes: ['md:w-12'] },
-      { classes: ['md:w-1/2', 'sm:text-center'] }
-    ]
-  );
+    );
+  }
 }
