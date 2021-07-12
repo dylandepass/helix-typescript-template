@@ -40,6 +40,10 @@ body.appear {
   background-color: var(--theme-color);
 }
 
+.blog-image-matte-background-color {
+  background-color: var(--blog-image-matte-background-color);
+}
+
 .card-1-background-color {
   background-color: var(--card-1-background-color);
 }

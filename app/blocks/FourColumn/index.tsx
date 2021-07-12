@@ -10,20 +10,23 @@
  * governing permissions and limitations under the License.
  */
 
-import { ChildElementModifier, ElementModifier } from '../../dom';
+import { ElementModifier, resolveElement } from '../../dom';
 import { decorate as decorateColumns } from '../Columns';
 
-export function decorate(block: Element, rowModifier?: ElementModifier): void {
-  let rowClasses = ['responsive-row'];
-  if (rowModifier?.classes) {
-    rowClasses = rowClasses.concat(rowModifier?.classes);
+export function decorate(elementOrSelector: Element | string, rowModifier?: ElementModifier): void {
+  const element = resolveElement(elementOrSelector);
+  if (element) {
+    let rowClasses = ['responsive-row'];
+    if (rowModifier?.classes) {
+      rowClasses = rowClasses.concat(rowModifier?.classes);
+    }
+    decorateColumns(element, { classes: rowClasses, childModifiers: rowModifier?.childModifiers }, [
+      {
+        classes: ['responsive-col', 'w-1/4']
+      },
+      { classes: ['responsive-col', 'w-1/4', 'flex-auto', 'text-lg'] },
+      { classes: ['responsive-col', 'w-1/4', 'flex-auto', 'text-lg'] },
+      { classes: ['responsive-col', 'w-1/4', 'flex-auto', 'text-lg'] }
+    ]);
   }
-  decorateColumns(block, { classes: rowClasses, childModifiers: rowModifier?.childModifiers }, [
-    {
-      classes: ['responsive-col', 'w-1/4']
-    },
-    { classes: ['responsive-col', 'w-1/4', 'flex-auto', 'text-lg'] },
-    { classes: ['responsive-col', 'w-1/4', 'flex-auto', 'text-lg'] },
-    { classes: ['responsive-col', 'w-1/4', 'flex-auto', 'text-lg'] }
-  ]);
 }

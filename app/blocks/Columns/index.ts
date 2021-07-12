@@ -10,34 +10,44 @@
  * governing permissions and limitations under the License.
  */
 
-import { applyElementModifier, createElement, ElementModifier, wrapElements } from '../../dom';
+import { decorateElement, createElement, ElementModifier, wrapElements, resolveElement } from '../../dom';
 import './style.css';
 
+/**
+ * Decorates an element with Flex box to layout in columns
+ * @param {Element | string} elementOrSelector      An element or a selector string
+ * @param {ElementModifier} rowModifier             A modifier applied to every row
+ * @param {ElementModifier[]} columnModifiers       A modifier applied to every column
+ * @returns
+ */
 export function decorate(
-  block: Element,
+  elementOrSelector: Element | string,
   rowModifier?: ElementModifier,
   columnModifiers?: ElementModifier[]
 ): Element[] {
+  const element = resolveElement(elementOrSelector);
   const rows: Element[] = [];
-  for (const row of Object.values(block.children)) {
-    row.classList.add('flex');
-    if (rowModifier) {
-      applyElementModifier(row, rowModifier);
-    }
-
-    const children = Array.from(row.children);
-    for (const index in children) {
-      const column = children[index];
-      const contentWrapper = createElement('div');
-      wrapElements(contentWrapper, Array.from(column.children));
-      if (columnModifiers) {
-        const modifier = columnModifiers[index];
-        if (modifier) {
-          applyElementModifier(column, modifier);
-        }
+  if (element) {
+    for (const row of Object.values(element.children)) {
+      row.classList.add('flex');
+      if (rowModifier) {
+        decorateElement(row, rowModifier);
       }
-      column.classList.add('column');
-      rows.push(column);
+
+      const children = Array.from(row.children);
+      for (const index in children) {
+        const column = children[index];
+        const contentWrapper = createElement('div');
+        wrapElements(contentWrapper, Array.from(column.children));
+        if (columnModifiers) {
+          const modifier = columnModifiers[index];
+          if (modifier) {
+            decorateElement(column, modifier);
+          }
+        }
+        column.classList.add('column');
+        rows.push(column);
+      }
     }
   }
 

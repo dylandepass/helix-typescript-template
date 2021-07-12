@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import { applyElementModifier, loadTemplate } from './dom';
+import { decorateElement, loadTemplate } from './dom';
 import { decorate as decorateNav } from './blocks/Nav';
 import './styles/styles.css';
 
@@ -20,51 +20,46 @@ function decorateTemplate() {
     loadTemplate();
 
     //Decorate nav
-    const headerBlock = document.querySelector('header');
-    if (headerBlock && headerBlock.parentElement) {
-      decorateNav(headerBlock, headerBlock.parentElement);
-    }
+    decorateNav('header');
 
-    const footerBlock = document.querySelector('footer');
-    if (footerBlock) {
-      applyElementModifier(footerBlock, {
-        classes: ['text-center', 'pt-32', 'footer-text-color'],
-        childModifiers: [
-          {
-            selector: 'h2',
-            modifier: { classes: ['text-2xl'] }
-          },
-          {
-            selector: 'h3',
-            modifier: { classes: ['text-2xl', 'font-bold', 'py-10', 'max-w-sm', 'mx-auto'] }
-          },
-          {
-            selector: 'ul:first-of-type',
-            modifier: { classes: ['flex', 'gap-10', 'mb-20', 'justify-center', 'text-lg', 'font-light'] }
-          },
-          {
-            selector: 'ul:first-of-type li:first-of-type',
-            validation: (element: Element) => {
-              const regex = /^\S+@\S+\.\S+$/;
-              const email = element.textContent;
-              if (email) {
-                const match = email.match(regex);
-                if (match) return match.length > 0;
-              }
-              return false;
+    //Decorate footer
+    decorateElement('footer', {
+      classes: ['text-center', 'pt-32', 'footer-text-color'],
+      childModifiers: [
+        {
+          selector: 'h2',
+          modifier: { classes: ['text-2xl', 'mb-10'] }
+        },
+        {
+          selector: 'h3',
+          modifier: { classes: ['text-2xl', 'font-bold', 'py-1', 'mx-auto'] }
+        },
+        {
+          selector: 'ul:first-of-type',
+          modifier: { classes: ['flex', 'gap-10', 'my-16', 'justify-center', 'text-lg', 'font-light'] }
+        },
+        {
+          selector: 'ul:first-of-type li:first-of-type',
+          validation: (element: Element) => {
+            const regex = /^\S+@\S+\.\S+$/;
+            const email = element.textContent;
+            if (email) {
+              const match = email.match(regex);
+              if (match) return match.length > 0;
             }
-          },
-          {
-            selector: 'hr',
-            modifier: { classes: ['border-b', 'border-gray-800'] }
-          },
-          {
-            selector: 'ul:nth-of-type(2)',
-            modifier: { classes: ['text-sm', 'uppercase', 'p-10', 'flex', 'gap-10'] }
+            return false;
           }
-        ]
-      });
-    }
+        },
+        {
+          selector: 'hr',
+          modifier: { classes: ['border-b', 'border-gray-800'] }
+        },
+        {
+          selector: 'ul:nth-of-type(2)',
+          modifier: { classes: ['text-sm', 'uppercase', 'p-10', 'flex', 'gap-10'] }
+        }
+      ]
+    });
   }
 }
 

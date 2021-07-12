@@ -10,19 +10,21 @@
  * governing permissions and limitations under the License.
  */
 
-import { ElementModifier } from '../../dom';
+import { ElementModifier, resolveElement } from '../../dom';
 import { decorate as decorateColumns } from '../Columns';
 
-export function decorate(block: Element, rowModifier?: ElementModifier): void {
-  let rowClasses = ['responsive-row'];
-  if (rowModifier?.classes) {
-    rowClasses = rowClasses.concat(rowModifier?.classes || []);
+export function decorate(elementOrSelector: Element | string, rowModifier?: ElementModifier): void {
+  const element = resolveElement(elementOrSelector);
+  if (element) {
+    let rowClasses = ['responsive-row'];
+    if (rowModifier?.classes) {
+      rowClasses = rowClasses.concat(rowModifier?.classes || []);
+    }
+    decorateColumns(element, { classes: rowClasses, childModifiers: rowModifier?.childModifiers }, [
+      {
+        classes: ['responsive-col', 'w-1/2']
+      },
+      { classes: ['responsive-col', 'w-1/2', 'flex-auto', 'text-lg'] }
+    ]);
   }
-  console.log(rowClasses);
-  decorateColumns(block, { classes: rowClasses, childModifiers: rowModifier?.childModifiers }, [
-    {
-      classes: ['responsive-col', 'w-1/2']
-    },
-    { classes: ['responsive-col', 'w-1/2', 'flex-auto', 'text-lg'] }
-  ]);
 }

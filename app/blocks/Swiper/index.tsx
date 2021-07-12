@@ -11,8 +11,7 @@
  */
 
 import { CommonDOMRenderer } from 'render-jsx/dom';
-//import Swiper, { Navigation, Pagination } from 'swiper';
-import { applyElementModifier } from '../../dom';
+import { decorateElement, resolveElement } from '../../dom';
 import './style.css';
 import Flickity from 'flickity';
 
@@ -29,32 +28,35 @@ function createSwiper(renderer: CommonDOMRenderer, slides: Element[]): Node {
   );
 }
 
-export function decorate(block: Element, parent: Element): void {
+export function decorate(elementOrSelector: Element | string, parent: Element): void {
+  const element = resolveElement(elementOrSelector);
   const renderer = new CommonDOMRenderer();
-  if (parent.previousElementSibling) {
-    parent.classList.add('swiper');
-    const heroTemplate = createSwiper(renderer, Object.values(block.children));
+  if (element) {
+    if (parent.previousElementSibling) {
+      parent.classList.add('swiper');
+      const heroTemplate = createSwiper(renderer, Object.values(element.children));
 
-    applyElementModifier(heroTemplate as Element, {
-      childModifiers: [
-        { selector: 'picture', modifier: { classes: ['mb-6'] } },
-        { selector: 'img', modifier: { classes: ['rounded-full', 'w-24', 'h-24', 'my-8', 'mx-auto'] } },
-        {
-          selector: 'h3',
-          modifier: {
-            classes: ['mb-24', 'secondary-font', 'secondary-font-color', 'uppercase', 'pt-10', 'font-bold', 'italic']
-          }
-        },
-        { selector: 'swiper-pagination', modifier: { classes: ['mb-10'] } },
-        { selector: 'p', modifier: { classes: ['w-9/12', 'mx-auto', 'font-light', 'secondary-font-color'] } }
-      ]
-    });
+      decorateElement(heroTemplate as Element, {
+        childModifiers: [
+          { selector: 'picture', modifier: { classes: ['mb-6'] } },
+          { selector: 'img', modifier: { classes: ['rounded-full', 'w-24', 'h-24', 'my-8', 'mx-auto'] } },
+          {
+            selector: 'h3',
+            modifier: {
+              classes: ['mb-24', 'secondary-font', 'secondary-font-color', 'uppercase', 'pt-10', 'font-bold', 'italic']
+            }
+          },
+          { selector: 'swiper-pagination', modifier: { classes: ['mb-10'] } },
+          { selector: 'p', modifier: { classes: ['w-9/12', 'mx-auto', 'font-light', 'secondary-font-color'] } }
+        ]
+      });
 
-    renderer.render(heroTemplate).after(parent.previousElementSibling);
+      renderer.render(heroTemplate).after(parent.previousElementSibling);
 
-    new Flickity('.swiper-wrapper', {
-      wrapAround: true
-    });
-    block.remove();
+      new Flickity('.swiper-wrapper', {
+        wrapAround: true
+      });
+      element.remove();
+    }
   }
 }

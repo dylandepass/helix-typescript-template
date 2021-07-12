@@ -16,42 +16,31 @@ import { decorate as decorateIconTwoColumn } from '../../blocks/IconTwoColumn';
 import { decorate as decorateTwoColumnList } from '../../blocks/TwoColumnList';
 import { decorate as decorateHero } from '../../blocks/Hero';
 import { decorate as decorateThreeCard } from '../../blocks/ThreeCard';
-import { applyElementModifier, onElementVisible, wrapSections } from '../../dom';
+import { decorateElement, onElementVisible, decorateSections } from '../../dom';
 
 function decoratePage() {
   const main = document.querySelector('main');
   if (main) {
     //Decorate hero block
-    const heroBlock = document.querySelector('main > div:first-of-type');
-    if (heroBlock && heroBlock.parentElement) {
-      decorateHero(heroBlock);
-    }
+    decorateHero('main > div:first-of-type');
 
     //Decorate about
-    const aboutBlock = document.querySelector('.about');
-    if (aboutBlock) {
-      decorateTwoColumn(aboutBlock, {
-        childModifiers: [
-          { selector: 'hr', modifier: { classes: ['about-hr', 'w-8', 'mt-5', 'border-1'] } },
-          {
-            selector: 'div:first-of-type h1',
-            modifier: { classes: ['text-3xl', 'tracking-wide', 'leading-snug'] }
-          }
-        ]
-      });
-    }
+    decorateTwoColumn('.about', {
+      childModifiers: [
+        { selector: 'hr', modifier: { classes: ['about-hr', 'w-8', 'mt-5', 'border-1'] } },
+        {
+          selector: 'div:first-of-type h1',
+          modifier: { classes: ['text-3xl', 'tracking-wide', 'leading-snug'] }
+        }
+      ]
+    });
 
     //Decorate skills
-    const skillsHeading = document.querySelector('#my-skills');
-    if (skillsHeading) {
-      applyElementModifier(skillsHeading, {
-        classes: ['text-center', 'uppercase', 'secondary-font', 'text-3xl', 'my-10']
-      });
-    }
-    const skillsBlock = document.querySelector('.skills');
-    if (skillsBlock) {
-      decorateIconTwoColumn(skillsBlock);
-    }
+    decorateElement('#my-skills', {
+      classes: ['text-center', 'uppercase', 'secondary-font', 'text-3xl', 'my-10']
+    });
+
+    decorateIconTwoColumn('.skills');
 
     //Decorate cards
     const cardsBlock = document.querySelector('.cards');
@@ -74,27 +63,16 @@ function decoratePage() {
     }
 
     //Decorate resume
-    const resumeHeading = document.querySelector('#my-resume');
-    if (resumeHeading) {
-      applyElementModifier(resumeHeading, {
-        classes: ['text-center', 'uppercase', 'secondary-font', 'text-3xl', 'mb-8']
-      });
-    }
-    const resumeBlock = document.querySelector('.resume');
-    if (resumeBlock) {
-      decorateTwoColumnList(resumeBlock);
-    }
+    decorateElement('#my-resume', {
+      classes: ['text-center', 'uppercase', 'secondary-font', 'text-3xl', 'mb-8']
+    });
+
+    decorateTwoColumnList('.resume');
   }
 
-  wrapSections(`main > div:not(.swiper):not(header):not(.hero)`);
+  decorateSections(`main > div:not(.swiper):not(header):not(.hero)`);
 
   document.body.classList.add('appear');
 }
 
-if (document.readyState == 'loading') {
-  window.addEventListener('DOMContentLoaded', () => {
-    decoratePage();
-  });
-} else {
-  decoratePage();
-}
+decoratePage();
