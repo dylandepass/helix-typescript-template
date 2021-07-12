@@ -11,6 +11,4 @@
 
 - [Home]('/')
 - [Blog]('/blog')
-- [Services]('/services')
-- [Portfolio]('/portfolio')
 - [Contacts]('/contacts')
