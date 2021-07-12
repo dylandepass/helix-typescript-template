@@ -9,8 +9,6 @@
 
 <hr>
 
-- [Home]('/')
-- [Blog]('/blog')
-- [Services]('/services')
-- [Portfolio]('/portfolio')
-- [Contacts]('/contacts')
+- [Home](/)
+- [Blog](/blog)
+- [Contacts](/contacts)
