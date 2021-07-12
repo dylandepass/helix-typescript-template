@@ -2,6 +2,8 @@
 
 An opinionated quick start template for bootstrapping a helix site with Typescript, Webpack and Tailwind CSS.
 
+[Example](https://dev--helix-typescript-template--dylandepass.hlx.page)
+
 ## Setup
 
 ```sh

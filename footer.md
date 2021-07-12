@@ -9,6 +9,6 @@
 
 <hr>
 
-- [Home]('/')
-- [Blog]('/blog')
-- [Contacts]('/contacts')
+- [Home](/)
+- [Blog](/blog)
+- [Contacts](/contacts)
