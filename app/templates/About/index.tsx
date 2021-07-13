@@ -24,7 +24,7 @@ function decoratePage() {
       {
         selector: 'div:first-of-type h1',
         modifier: {
-          classes: ['text-2xl', 'tracking-wide', 'leading-snug']
+          classes: ['text-2xl', 'tracking-wide', 'leading-snug', 'mb-10']
         }
       },
       {

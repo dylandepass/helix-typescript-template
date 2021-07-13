@@ -101,6 +101,20 @@ export function loadCSS(href: string): Promise<void> {
 }
 
 /**
+ * Loads an HTML fragment into the DOM
+ *
+ * @param {string} path  Fragment path
+ * @returns     Promise
+ */
+export function loadFragment(path: string): Promise<string> {
+  return new Promise(function (resolve, reject) {
+    fetch(path).then((response) => {
+      resolve(response.text());
+    });
+  });
+}
+
+/**
  * Creates an element
  * @param {string} name                     Tag name
  * @param {Record<string, string>} attrs    Attributes

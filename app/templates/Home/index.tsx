@@ -27,10 +27,12 @@ function decoratePage() {
     //Decorate about
     decorateTwoColumn('.about', {
       childModifiers: [
-        { selector: 'hr', modifier: { classes: ['about-hr', 'w-8', 'mt-5', 'border-1'] } },
         {
           selector: 'div:first-of-type h1',
-          modifier: { classes: ['text-3xl', 'tracking-wide', 'leading-snug'] }
+          modifier: {
+            classes: ['text-3xl', 'tracking-wide', 'leading-snug'],
+            inserts: [{ tag: 'hr', position: 'afterend', classes: ['about-hr', 'w-8', 'border-1', 'my-5'] }]
+          }
         }
       ]
     });
