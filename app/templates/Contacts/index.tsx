@@ -10,11 +10,11 @@
  * governing permissions and limitations under the License.
  */
 
-import { decorateSections } from '../../dom';
+import { decorateSections, loadFragmentBySelector } from '../../dom';
 import { decorate as decorateTwoColumn } from '../../blocks/TwoColumn';
 import { decorate as decorateMap } from '../../blocks/Map';
 
-function decoratePage() {
+async function decoratePage() {
   //Decorate contacts
   decorateTwoColumn('.contacts', {
     classes: ['responsive-row', 'md:mt-24', 'gap-10', 'md:gap-24', 'mb-24'],
@@ -37,6 +37,8 @@ function decoratePage() {
       }
     ]
   });
+
+  loadFragmentBySelector('.responsive-col:nth-of-type(2) p');
 
   const mapBlock = document.querySelector('.maps');
   if (mapBlock) {

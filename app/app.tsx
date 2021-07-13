@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import { decorateElement, loadTemplate, loadFragment } from './dom';
+import { decorateElement, loadTemplate, loadFragment, loadFragmentBySelector } from './dom';
 import { decorate as decorateNav } from './blocks/Nav';
 import './styles/styles.css';
 
@@ -72,6 +72,8 @@ async function decorateTemplate() {
         }
       ]
     });
+
+    loadFragmentBySelector('.fragment');
   }
 }
 
