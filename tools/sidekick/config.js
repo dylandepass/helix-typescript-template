@@ -14,7 +14,7 @@
 // This file contains the project-specific configuration for the sidekick.
 window.hlx.initSidekick({
   project: 'helix-typescript-template',
-  host: 'dev--helix-typescript-template--dylandepass.hlx.page',
+  host: 'dev--helix-typescript-template--dylandepass.hlx3.page',
   byocdn: false,
   hlx3: true
 });
