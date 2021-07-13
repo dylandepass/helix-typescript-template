@@ -101,7 +101,28 @@ export function loadCSS(href: string): Promise<void> {
 }
 
 /**
- * Loads an HTML fragment into the DOM
+ * Loads an HTML fragments matching the given selector
+ *
+ * @param {string} selector  selector to match
+ * @returns     Promise
+ */
+export async function loadFragmentBySelector(selector: string): Promise<string | void> {
+  const fragmentElements = document.querySelectorAll(selector);
+  for (const fragmentElement of Array.from(fragmentElements)) {
+    console.log(`loading fragment ${fragmentElement.textContent}`);
+    const path = fragmentElement.textContent;
+    console.log('path ' + path);
+    if (path) {
+      const fragment = await loadFragment(path);
+      fragmentElement.insertAdjacentHTML('beforebegin', fragment);
+      fragmentElement.remove();
+      return fragment;
+    }
+  }
+}
+
+/**
+ * Retrieves an HTML fragment at the given path
  *
  * @param {string} path  Fragment path
  * @returns     Promise
