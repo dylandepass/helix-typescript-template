@@ -10,17 +10,29 @@
  * governing permissions and limitations under the License.
  */
 
-import { decorateElement, loadTemplate } from './dom';
+import { decorateElement, loadTemplate, loadFragment } from './dom';
 import { decorate as decorateNav } from './blocks/Nav';
 import './styles/styles.css';
 
-function decorateTemplate() {
+async function decorateTemplate() {
   const main = document.querySelector('main');
   if (main) {
     loadTemplate();
 
+    const headerFragment = await loadFragment('/header.plain.html');
+    const header = document.querySelector('header');
+    if (header) {
+      header.insertAdjacentHTML('afterbegin', headerFragment);
+    }
+
     //Decorate nav
     decorateNav('header');
+
+    const footerFragment = await loadFragment('/footer.plain.html');
+    const footer = document.querySelector('footer');
+    if (footer) {
+      footer.insertAdjacentHTML('afterbegin', footerFragment);
+    }
 
     //Decorate footer
     decorateElement('footer', {

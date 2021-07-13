@@ -22,7 +22,7 @@ export function decorate(elementOrSelector: Element | string): void {
         classes: ['responsive-row'],
         childModifiers: [
           {
-            selector: 'p:first-of-type',
+            selector: 'h3',
             modifier: {
               classes: [
                 'secondary-font',
@@ -36,7 +36,7 @@ export function decorate(elementOrSelector: Element | string): void {
             }
           },
           {
-            selector: 'p:nth-of-type(2)',
+            selector: 'p',
             modifier: { classes: ['font-light', 'pb-8', 'text-center', 'md:text-left', 'lg:text-left'] }
           },
           {
