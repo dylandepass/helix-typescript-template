@@ -4,6 +4,7 @@
 
 body {
   font-family: var(--font-family);
+  font-display: optional;
   margin: 0;
   padding: 0;
   opacity: 0;
