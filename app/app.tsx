@@ -15,6 +15,7 @@ import { decorate as decorateNav } from './blocks/Nav';
 import './styles/styles.css';
 
 async function decorateTemplate() {
+  loadFragmentBySelector('.fragment');
   loadTemplate();
 
   const headerFragment = await loadFragment('/header.plain.html');
@@ -70,8 +71,6 @@ async function decorateTemplate() {
       }
     ]
   });
-
-  loadFragmentBySelector('.fragment');
 
   //For screen readers and lighthouse score
   decorateElement('html', { attributes: { lang: 'en' } });
