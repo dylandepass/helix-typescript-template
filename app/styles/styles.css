@@ -112,5 +112,5 @@ footer {
 }
 
 .text-input-background-color {
-  background-color: var(--footer-background-color);
+  background-color: var(--text-input-background-color);
 }
