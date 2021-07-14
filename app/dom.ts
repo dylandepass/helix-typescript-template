@@ -86,16 +86,22 @@ export function loadScript(url: string, type = 'text/javascript'): Promise<void>
 export function loadCSS(href: string): Promise<void> {
   return new Promise(function (resolve, reject) {
     if (!document.querySelector(`head > link[href="${href}"]`)) {
-      const link = document.createElement('link');
-      link.setAttribute('rel', 'stylesheet');
-      link.setAttribute('href', href);
-      link.onload = () => {
+      const preloadCSSLink = document.createElement('link');
+      preloadCSSLink.setAttribute('rel', 'preload');
+      preloadCSSLink.setAttribute('as', 'style');
+      preloadCSSLink.setAttribute('href', href);
+      document.head.appendChild(preloadCSSLink);
+
+      const cssLink = document.createElement('link');
+      cssLink.setAttribute('rel', 'stylesheet');
+      cssLink.setAttribute('href', href);
+      cssLink.onload = () => {
         resolve();
       };
-      link.onerror = () => {
+      cssLink.onerror = () => {
         reject();
       };
-      document.head.appendChild(link);
+      document.head.appendChild(cssLink);
     }
   });
 }
