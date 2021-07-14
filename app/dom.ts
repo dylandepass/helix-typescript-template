@@ -42,7 +42,6 @@ export function loadTemplate(): void {
   const templateElement = document.querySelector('.template');
   if (templateElement) {
     const template = templateElement?.textContent?.toLowerCase();
-    console.log(`template ${template}`);
     loadScript(`/build/${template}-bundle.js`);
     loadCSS(`/build/${template}.css`);
     templateElement.remove();
@@ -115,9 +114,7 @@ export function loadCSS(href: string): Promise<void> {
 export async function loadFragmentBySelector(selector: string): Promise<string | void> {
   const fragmentElements = document.querySelectorAll(selector);
   for (const fragmentElement of Array.from(fragmentElements)) {
-    console.log(`loading fragment ${fragmentElement.textContent}`);
     const path = fragmentElement.textContent;
-    console.log('path ' + path);
     if (path) {
       const fragment = await loadFragment(path);
       fragmentElement.insertAdjacentHTML('beforebegin', fragment);
