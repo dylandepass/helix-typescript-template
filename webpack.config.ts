@@ -16,30 +16,23 @@ const webpackConfig = (env: Environment): Configuration => ({
   },
   entry: {
     app: {
-      import: './app/app.tsx',
-      dependOn: 'shared'
+      import: './app/app.tsx'
     },
     home: {
-      import: './app/templates/Home/index.tsx',
-      dependOn: 'shared'
+      import: './app/templates/Home/index.tsx'
     },
     about: {
-      import: './app/templates/About/index.tsx',
-      dependOn: 'shared'
+      import: './app/templates/About/index.tsx'
     },
     blog: {
-      import: './app/templates/Blog/index.tsx',
-      dependOn: 'shared'
+      import: './app/templates/Blog/index.tsx'
     },
     post: {
-      import: './app/templates/Post/index.tsx',
-      dependOn: 'shared'
+      import: './app/templates/Post/index.tsx'
     },
     contacts: {
-      import: './app/templates/Contacts/index.tsx',
-      dependOn: 'shared'
-    },
-    shared: ['render-jsx']
+      import: './app/templates/Contacts/index.tsx'
+    }
   },
   watch: env.production || !env.development ? false : true,
   output: {
