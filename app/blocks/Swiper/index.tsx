@@ -39,7 +39,13 @@ export function decorate(elementOrSelector: Element | string, parent: Element): 
       decorateElement(heroTemplate as Element, {
         childModifiers: [
           { selector: 'picture', modifier: { classes: ['mb-6'] } },
-          { selector: 'img', modifier: { classes: ['rounded-full', 'w-24', 'h-24', 'my-8', 'mx-auto'] } },
+          {
+            selector: 'img',
+            modifier: {
+              classes: ['rounded-full', 'w-24', 'h-24', 'my-8', 'mx-auto'],
+              attributes: { width: '96', height: '96' }
+            }
+          },
           {
             selector: 'h3',
             modifier: {

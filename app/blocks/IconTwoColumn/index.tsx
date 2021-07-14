@@ -42,7 +42,8 @@ export function decorate(elementOrSelector: Element | string): void {
           {
             selector: 'img',
             modifier: {
-              classes: ['mx-auto', 'w-14', 'h-14', 'm-10', 'md:m-0', 'md:w-7', 'md:h-7', 'lg:w-7', 'lg:h-7', 'lg:m-0']
+              classes: ['mx-auto', 'w-14', 'h-14', 'm-10', 'md:m-0', 'md:w-7', 'md:h-7', 'lg:w-7', 'lg:h-7', 'lg:m-0'],
+              attributes: { width: '28', height: '28' }
             }
           }
         ]
