@@ -15,8 +15,6 @@ import { decorate as decorateTwoColumn } from '../../blocks/TwoColumn';
 import { decorate as decorateMap } from '../../blocks/Map';
 
 async function decoratePage() {
-  loadFragmentBySelector('.responsive-col:nth-of-type(2) p');
-
   //Decorate contacts
   decorateTwoColumn('.contacts', {
     classes: ['responsive-row', 'md:mt-24', 'gap-10', 'md:gap-24', 'mb-24'],
@@ -39,6 +37,8 @@ async function decoratePage() {
       }
     ]
   });
+
+  loadFragmentBySelector('.responsive-col:nth-of-type(2) p');
 
   const mapBlock = document.querySelector('.maps');
   if (mapBlock) {
