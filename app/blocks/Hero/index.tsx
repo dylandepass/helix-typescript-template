@@ -23,7 +23,6 @@ export function decorate(elementOrSelector: Element | string): void {
         'bg-black',
         'bg-opacity-30',
         'shadow-inner',
-        'min-h-screen',
         'text-center',
         'justify-center',
         'items-center',

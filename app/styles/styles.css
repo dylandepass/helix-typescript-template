@@ -17,6 +17,19 @@ body.appear {
   opacity: 1;
 }
 
+header {
+  height: 88px;
+  background-color: var(--header-background-color);
+}
+
+.hero {
+  height: calc(100vh - 88px);
+}
+
+.fragment {
+  display: none;
+}
+
 .section {
   @apply p-12;
 }
