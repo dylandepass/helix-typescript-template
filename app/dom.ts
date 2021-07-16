@@ -114,7 +114,8 @@ export function loadCSS(href: string): Promise<void> {
 export async function loadFragmentBySelector(selector: string): Promise<string | void> {
   const fragmentElements = document.querySelectorAll(selector);
   for (const fragmentElement of Array.from(fragmentElements)) {
-    const path = fragmentElement.textContent;
+    const path = fragmentElement.querySelector('p:first-of-type')?.textContent;
+    console.log('path ' + path);
     if (path) {
       const fragment = await loadFragment(path);
       fragmentElement.insertAdjacentHTML('beforebegin', fragment);
