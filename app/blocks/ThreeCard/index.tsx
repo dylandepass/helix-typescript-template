@@ -23,7 +23,7 @@ export function decorate(elementOrSelector: Element | string): void {
         childModifiers: [
           {
             selector: 'img',
-            modifier: { classes: ['mb-12', 'mx-auto', 'w-10/12'] }
+            modifier: { classes: ['mb-12', 'mx-auto', 'w-10/12'], attributes: { width: '228', height: '177' } }
           },
           {
             selector: 'div h3',

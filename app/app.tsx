@@ -15,66 +15,65 @@ import { decorate as decorateNav } from './blocks/Nav';
 import './styles/styles.css';
 
 async function decorateTemplate() {
-  const main = document.querySelector('main');
-  if (main) {
-    loadTemplate();
+  loadFragmentBySelector('.fragment');
+  loadTemplate();
 
-    const headerFragment = await loadFragment('/header.plain.html');
-    const header = document.querySelector('header');
-    if (header) {
-      header.insertAdjacentHTML('afterbegin', headerFragment);
-    }
-
-    //Decorate nav
-    decorateNav('header');
-
-    const footerFragment = await loadFragment('/footer.plain.html');
-    const footer = document.querySelector('footer');
-    if (footer) {
-      footer.insertAdjacentHTML('afterbegin', footerFragment);
-    }
-
-    //Decorate footer
-    decorateElement('footer', {
-      classes: ['text-center', 'pt-32', 'footer-text-color'],
-      childModifiers: [
-        {
-          selector: 'h2',
-          modifier: { classes: ['text-2xl', 'mb-10'] }
-        },
-        {
-          selector: 'h3',
-          modifier: { classes: ['text-2xl', 'font-bold', 'py-1', 'mx-auto'] }
-        },
-        {
-          selector: 'ul:first-of-type',
-          modifier: { classes: ['flex', 'gap-10', 'my-16', 'justify-center', 'text-lg', 'font-light'] }
-        },
-        {
-          selector: 'ul:first-of-type li:first-of-type',
-          validation: (element: Element) => {
-            const regex = /^\S+@\S+\.\S+$/;
-            const email = element.textContent;
-            if (email) {
-              const match = email.match(regex);
-              if (match) return match.length > 0;
-            }
-            return false;
-          }
-        },
-        {
-          selector: 'hr',
-          modifier: { classes: ['border-b', 'border-gray-800'] }
-        },
-        {
-          selector: 'ul:nth-of-type(2)',
-          modifier: { classes: ['text-sm', 'uppercase', 'p-10', 'flex', 'gap-10'] }
-        }
-      ]
-    });
-
-    loadFragmentBySelector('.fragment');
+  const headerFragment = await loadFragment('/header.plain.html');
+  const header = document.querySelector('header');
+  if (header) {
+    header.insertAdjacentHTML('afterbegin', headerFragment);
   }
+
+  //Decorate nav
+  decorateNav('header');
+
+  const footerFragment = await loadFragment('/footer.plain.html');
+  const footer = document.querySelector('footer');
+  if (footer) {
+    footer.insertAdjacentHTML('afterbegin', footerFragment);
+  }
+
+  //Decorate footer
+  decorateElement('footer', {
+    classes: ['text-center', 'pt-32', 'footer-text-color'],
+    childModifiers: [
+      {
+        selector: 'h2',
+        modifier: { classes: ['text-2xl', 'mb-10'] }
+      },
+      {
+        selector: 'h3',
+        modifier: { classes: ['text-2xl', 'font-bold', 'py-1', 'mx-auto'] }
+      },
+      {
+        selector: 'ul:first-of-type',
+        modifier: { classes: ['flex', 'gap-10', 'my-16', 'justify-center', 'text-lg', 'font-light'] }
+      },
+      {
+        selector: 'ul:first-of-type li:first-of-type',
+        validation: (element: Element) => {
+          const regex = /^\S+@\S+\.\S+$/;
+          const email = element.textContent;
+          if (email) {
+            const match = email.match(regex);
+            if (match) return match.length > 0;
+          }
+          return false;
+        }
+      },
+      {
+        selector: 'hr',
+        modifier: { classes: ['border-b', 'border-gray-800'] }
+      },
+      {
+        selector: 'ul:nth-of-type(2)',
+        modifier: { classes: ['text-sm', 'uppercase', 'p-10', 'flex', 'gap-10'] }
+      }
+    ]
+  });
+
+  //For screen readers and lighthouse score
+  decorateElement('html', { attributes: { lang: 'en' } });
 }
 
 if (document.readyState == 'loading') {

@@ -3,9 +3,14 @@
 <script src="/build/runtime-bundle.js"></script>
 <script src="/build/app-bundle.js"></script>
 <script src="/build/shared-bundle.js"></script>
-<link href="/theme.css" rel="stylesheet" />
-<link href="/build/app.css" rel="stylesheet" />
+<link href="/theme.css" rel="stylesheet" media="screen" />
+<link href="/build/app.css" rel="stylesheet" media="screen" />
+<!-- Async google fonts: https://pagespeedchecklist.com/asynchronous-google-fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;800&display=swap" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;800&display=swap">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;800&display=swap" media="print"
+    onload="this.onload=null;this.removeAttribute('media');" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&display=swap" media="print"
+    onload="this.onload=null;this.removeAttribute('media');" rel="stylesheet">

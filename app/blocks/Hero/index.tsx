@@ -23,7 +23,6 @@ export function decorate(elementOrSelector: Element | string): void {
         'bg-black',
         'bg-opacity-30',
         'shadow-inner',
-        'min-h-screen',
         'text-center',
         'justify-center',
         'items-center',
@@ -35,7 +34,7 @@ export function decorate(elementOrSelector: Element | string): void {
           modifier: { classes: ['text-8xl', 'uppercase', 'leading-tight', 'font-extrabold', 'md:text-12xl'] }
         },
         {
-          selector: 'h3',
+          selector: 'h2',
           modifier: { classes: ['text-4xl', 'font-semibold', 'uppercase', 'md:text-6xl', 'mb-10'] }
         }
       ]

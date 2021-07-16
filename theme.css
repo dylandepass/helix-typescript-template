@@ -15,9 +15,10 @@
   --header-text-color: #ffffff;
   --footer-text-color: #ffffff;
   --text-highlight-color: #f4b942;
+  --text-input-background-color: #000000;
 
   /* HERO */
-  --hero-text-color: #ffffff;
+  --hero-text-color: #000000;
 
   /* CARDS */
   --blog-image-matte-background-color: #dbeafe;
@@ -47,6 +48,7 @@
     --header-text-color: #ffffff;
     --footer-text-color: #ffffff;
     --text-highlight-color: #f4b942;
+    --text-input-background-color: #000000;
 
     /* HERO */
     --hero-text-color: #ffffff;

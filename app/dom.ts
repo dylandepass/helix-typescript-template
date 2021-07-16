@@ -42,7 +42,6 @@ export function loadTemplate(): void {
   const templateElement = document.querySelector('.template');
   if (templateElement) {
     const template = templateElement?.textContent?.toLowerCase();
-    console.log(`template ${template}`);
     loadScript(`/build/${template}-bundle.js`);
     loadCSS(`/build/${template}.css`);
     templateElement.remove();
@@ -86,16 +85,22 @@ export function loadScript(url: string, type = 'text/javascript'): Promise<void>
 export function loadCSS(href: string): Promise<void> {
   return new Promise(function (resolve, reject) {
     if (!document.querySelector(`head > link[href="${href}"]`)) {
-      const link = document.createElement('link');
-      link.setAttribute('rel', 'stylesheet');
-      link.setAttribute('href', href);
-      link.onload = () => {
+      const preloadCSSLink = document.createElement('link');
+      preloadCSSLink.setAttribute('rel', 'preload');
+      preloadCSSLink.setAttribute('as', 'style');
+      preloadCSSLink.setAttribute('href', href);
+      document.head.appendChild(preloadCSSLink);
+
+      const cssLink = document.createElement('link');
+      cssLink.setAttribute('rel', 'stylesheet');
+      cssLink.setAttribute('href', href);
+      cssLink.onload = () => {
         resolve();
       };
-      link.onerror = () => {
+      cssLink.onerror = () => {
         reject();
       };
-      document.head.appendChild(link);
+      document.head.appendChild(cssLink);
     }
   });
 }
@@ -109,9 +114,7 @@ export function loadCSS(href: string): Promise<void> {
 export async function loadFragmentBySelector(selector: string): Promise<string | void> {
   const fragmentElements = document.querySelectorAll(selector);
   for (const fragmentElement of Array.from(fragmentElements)) {
-    console.log(`loading fragment ${fragmentElement.textContent}`);
     const path = fragmentElement.textContent;
-    console.log('path ' + path);
     if (path) {
       const fragment = await loadFragment(path);
       fragmentElement.insertAdjacentHTML('beforebegin', fragment);
