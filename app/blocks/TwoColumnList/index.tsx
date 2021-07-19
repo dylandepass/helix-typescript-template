@@ -19,16 +19,7 @@ export function decorate(elementOrSelector: Element | string): void {
     decorateColumns(
       element,
       {
-        classes: [
-          'responsive-row',
-          'py-8',
-          'sm:py-4',
-          'border-b',
-          'resume-separator-color',
-          'w-3/4',
-          'mx-auto',
-          'mb-16'
-        ]
+        classes: ['responsive-row', 'py-8', 'sm:py-4', 'border-b', 'separator-color', 'w-3/4', 'mx-auto', 'mb-16']
       },
       [
         {

@@ -19,58 +19,55 @@ import { decorate as decorateThreeCard } from '../../blocks/ThreeCard';
 import { decorateElement, onElementVisible, decorateSections } from '../../dom';
 
 function decoratePage() {
-  const main = document.querySelector('main');
-  if (main) {
-    //Decorate hero block
-    decorateHero('main > div:first-of-type');
+  //Decorate hero block
+  decorateHero('main > div:first-of-type');
 
-    //Decorate about
-    decorateTwoColumn('.about', {
-      childModifiers: [
-        {
-          selector: 'div:first-of-type h1',
-          modifier: {
-            classes: ['text-3xl', 'tracking-wide', 'leading-snug'],
-            inserts: [{ tag: 'hr', position: 'afterend', classes: ['about-hr', 'w-8', 'border-1', 'my-5'] }]
-          }
+  //Decorate about
+  decorateTwoColumn('.about', {
+    childModifiers: [
+      {
+        selector: 'div:first-of-type h1',
+        modifier: {
+          classes: ['text-3xl', 'tracking-wide', 'leading-snug'],
+          inserts: [{ tag: 'hr', position: 'afterend', classes: ['about-hr', 'w-8', 'border-1', 'my-5'] }]
         }
-      ]
-    });
+      }
+    ]
+  });
 
-    //Decorate skills
-    decorateElement('#my-skills', {
-      classes: ['text-center', 'uppercase', 'secondary-font', 'text-3xl', 'my-10']
-    });
+  //Decorate skills
+  decorateElement('#my-skills', {
+    classes: ['text-center', 'uppercase', 'secondary-font', 'text-3xl', 'my-10']
+  });
 
-    decorateIconTwoColumn('.skills');
+  decorateIconTwoColumn('.skills');
 
-    //Decorate cards
-    const cardsBlock = document.querySelector('.cards');
-    if (cardsBlock) {
-      decorateThreeCard(cardsBlock);
-      onElementVisible(cardsBlock, '.responsive-col', (index: number, element: Element) => {
-        const duration = (index + 1) * 0.2;
-        element.addEventListener('animationend', () => {
-          element.classList.remove('opacity-0');
-        });
-        element.setAttribute('style', `animation-delay: ${duration}s;`);
-        element.classList.add('animate-fade-in-down');
+  //Decorate cards
+  const cardsBlock = document.querySelector('.cards');
+  if (cardsBlock) {
+    decorateThreeCard(cardsBlock);
+    onElementVisible(cardsBlock, '.responsive-col', (index: number, element: Element) => {
+      const duration = (index + 1) * 0.2;
+      element.addEventListener('animationend', () => {
+        element.classList.remove('opacity-0');
       });
-    }
-
-    //Decorate swiper
-    const swiperBlock = document.querySelector('.swiper');
-    if (swiperBlock && swiperBlock.parentElement) {
-      decorateSwiper(swiperBlock, swiperBlock.parentElement);
-    }
-
-    //Decorate resume
-    decorateElement('#my-resume', {
-      classes: ['text-center', 'uppercase', 'secondary-font', 'text-3xl', 'mb-8']
+      element.setAttribute('style', `animation-delay: ${duration}s;`);
+      element.classList.add('animate-fade-in-down');
     });
-
-    decorateTwoColumnList('.resume');
   }
+
+  //Decorate swiper
+  const swiperBlock = document.querySelector('.swiper');
+  if (swiperBlock && swiperBlock.parentElement) {
+    decorateSwiper(swiperBlock, swiperBlock.parentElement);
+  }
+
+  //Decorate resume
+  decorateElement('#my-resume', {
+    classes: ['text-center', 'uppercase', 'secondary-font', 'text-3xl', 'mb-8']
+  });
+
+  decorateTwoColumnList('.resume');
 
   decorateSections(`main > div:not(.swiper):not(header):not(.hero)`);
 

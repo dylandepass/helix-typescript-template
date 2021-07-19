@@ -47,12 +47,12 @@ export function decorate(elementOrSelector: Element | string, parent: Element): 
             }
           },
           {
-            selector: 'h3',
+            selector: 'h1',
             modifier: {
               classes: ['mb-24', 'secondary-font', 'secondary-font-color', 'uppercase', 'pt-10', 'font-bold', 'italic']
             }
           },
-          { selector: 'swiper-pagination', modifier: { classes: ['mb-10'] } },
+          { selector: 'h3', modifier: { classes: ['mb-10'] } },
           { selector: 'p', modifier: { classes: ['w-9/12', 'mx-auto', 'font-light', 'secondary-font-color'] } }
         ]
       });

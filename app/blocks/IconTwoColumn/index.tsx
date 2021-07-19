@@ -22,7 +22,7 @@ export function decorate(elementOrSelector: Element | string): void {
         classes: ['responsive-row'],
         childModifiers: [
           {
-            selector: 'h3',
+            selector: 'h1',
             modifier: {
               classes: [
                 'secondary-font',

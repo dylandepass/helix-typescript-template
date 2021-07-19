@@ -82,7 +82,7 @@ header {
   color: var(--4-card-text-color);
 }
 
-.resume-separator-color {
+.separator-color {
   border-color: var(--separator-color);
 }
 
@@ -109,6 +109,10 @@ footer {
 
 .footer-text-color {
   color: var(--footer-text-color);
+}
+
+.footer-separator-color {
+  border-color: var(--footer-separator-color);
 }
 
 .text-input-background-color {
