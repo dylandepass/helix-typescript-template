@@ -1,9 +1,9 @@
 # helix-typescript-template
 
 A **highly opinionated** quick start template for bootstrapping a H
-elix site with Typescript, Webpack and Tailwind CSS.
+elix 3 site with Typescript, Webpack and Tailwind CSS.
 
-[Example](https://dev--helix-typescript-template--dylandepass.hlx.page)
+[Example](https://dev--helix-typescript-template--dylandepass.hlx3.page)
 
 ## Setup
 
@@ -150,7 +150,7 @@ In this template we say goodbye to all semantic CSS when it comes to the structu
 
 Our structural CSS comes courtesy of [Tailwind](https://tailwindcss.com), a utility first CSS framework that has exploded in popularity over the last couple years for it's ease of use and the speed at which you can style HTML. The number of lines of code written in this project would be significantly higher if custom CSS was written, which highlights a major benefit of using Tailwind as your projects CSS does not grow linearly. By having utility class names that will be shared between elements, it guarantees a consistent bundle size. Furthermore, Tailwind paired with Purge CSS will remove any unused styles so the codebase will not be bloated with extra classes.
 
-<img src="https://i.imgur.com/vJxzhgB.png" style="max-width:600px;">
+<img src="https://i.imgur.com/vJxzhgB.png" style="max-width:400px;max-height:400px;">
 
 A great [Cheat Sheet](https://nerdcave.com/tailwind-cheat-sheet) is available for tailwind that will speed up development time while getting started with the framework.
 
