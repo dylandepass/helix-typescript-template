@@ -34,7 +34,7 @@ function createNav(renderer: CommonDOMRenderer, title?: string, leftMenu?: Eleme
         </div>
       </nav>
       <button class="inline-block z-50 ml-auto mr-5 lg:hidden lg:hidden py-7">
-        <img src="/icons/hamburger.svg" />
+        <img src="/icons/hamburger.svg" width="24" height="24" alt="menu" />
       </button>
     </header>
   );

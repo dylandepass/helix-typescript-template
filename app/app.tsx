@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import { decorateElement, loadTemplate, loadFragment, loadFragmentBySelector } from './dom';
+import { decorateElement, loadTemplate, loadFragmentBySelector, fetchFragmentAtPath } from './dom';
 import { decorate as decorateNav } from './blocks/Nav';
 import './styles/styles.css';
 
@@ -18,7 +18,7 @@ async function decorateTemplate() {
   loadFragmentBySelector('.fragment');
   loadTemplate();
 
-  const headerFragment = await loadFragment('/header.plain.html');
+  const headerFragment = await fetchFragmentAtPath('/header.plain.html');
   const header = document.querySelector('header');
   if (header) {
     header.insertAdjacentHTML('afterbegin', headerFragment);
@@ -27,7 +27,7 @@ async function decorateTemplate() {
   //Decorate nav
   decorateNav('header');
 
-  const footerFragment = await loadFragment('/footer.plain.html');
+  const footerFragment = await fetchFragmentAtPath('/footer.plain.html');
   const footer = document.querySelector('footer');
   if (footer) {
     footer.insertAdjacentHTML('afterbegin', footerFragment);
@@ -63,7 +63,7 @@ async function decorateTemplate() {
       },
       {
         selector: 'hr',
-        modifier: { classes: ['border-b', 'border-gray-800'] }
+        modifier: { classes: ['border-b', 'footer-separator-color'] }
       },
       {
         selector: 'ul:nth-of-type(2)',

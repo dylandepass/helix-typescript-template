@@ -14,11 +14,12 @@ import { decorateElement, decorateSections } from '../../dom';
 
 function decoratePage() {
   decorateElement('main p:first-of-type', {
-    classes: ['mt-24', 'py-6', 'px-3', 'bg-blue-100']
+    classes: ['mt-12', 'py-6', 'px-3', 'bg-blue-100']
   });
 
   decorateElement('main img:first-of-type', {
-    classes: ['w-full', 'max-h-96', 'object-cover']
+    classes: ['w-full', 'max-h-96', 'object-cover'],
+    attributes: { width: '999', height: '384' }
   });
 
   decorateElement('main h1', {
@@ -29,13 +30,14 @@ function decoratePage() {
     classes: ['text-center', 'uppercase', 'mb-16']
   });
 
-  decorateElement('main', {
+  decorateElement('main > div', {
     childModifiers: [
       {
         selector: 'p:not(:first-child)',
         modifier: { classes: ['pb-4', 'md:w-8/12', 'font-light', 'mx-auto'] }
       }
-    ]
+    ],
+    inserts: [{ tag: 'hr', position: 'beforeend', classes: ['my-10', 'separator-color'] }]
   });
 
   decorateSections(`main > div`);

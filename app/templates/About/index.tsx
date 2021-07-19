@@ -18,7 +18,7 @@ import { decorate as decorateFourColumn } from '../../blocks/FourColumn';
 function decoratePage() {
   //Decorate about
   decorateTwoColumn('.about', {
-    classes: ['responsive-row', 'md:mt-24', 'md:gap-24'],
+    classes: ['responsive-row', 'md:gap-24'],
     childModifiers: [
       { selector: 'hr', modifier: { classes: ['about-hr', 'w-8', 'border-1', 'my-5'] } },
       {
@@ -52,18 +52,40 @@ function decoratePage() {
           modifier: { classes: ['text-lg', 'secondary-font', 'text-lg', 'mb-4'] }
         },
         {
-          selector: 'p',
+          selector: 'p:nth-of-type(2)',
           modifier: { classes: ['text-5xl', 'font-bold'] }
         }
       ]
     });
     onElementVisible(statsBlock, '.responsive-col', (index: number, element: Element) => {
+      //Fade in and animate cards down
       const duration = (index + 1) * 0.2;
       element.addEventListener('animationend', () => {
         element.classList.remove('opacity-0');
       });
       element.setAttribute('style', `animation-delay: ${duration}s;`);
       element.classList.add('animate-fade-in-down');
+
+      //Animate numbers
+      let count = 0;
+      const valueElement = element.querySelector('p:nth-of-type(2)');
+      if (valueElement && valueElement.textContent) {
+        const countTarget = parseInt(valueElement.textContent);
+        const updateCounter = (valueElement: Element) => {
+          if (valueElement && valueElement.textContent) {
+            count++;
+            if (count < countTarget) {
+              valueElement.innerHTML = count.toString();
+              setTimeout(() => {
+                updateCounter(valueElement);
+              }, 2000 / countTarget);
+            } else {
+              valueElement.innerHTML = countTarget.toString();
+            }
+          }
+        };
+        updateCounter(valueElement);
+      }
     });
   }
 

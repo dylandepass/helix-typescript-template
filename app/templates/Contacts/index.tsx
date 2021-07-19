@@ -10,14 +10,14 @@
  * governing permissions and limitations under the License.
  */
 
-import { decorateSections, loadFragmentBySelector } from '../../dom';
+import { decorateSections, loadFragmentByElement, loadFragmentBySelector } from '../../dom';
 import { decorate as decorateTwoColumn } from '../../blocks/TwoColumn';
 import { decorate as decorateMap } from '../../blocks/Map';
 
 async function decoratePage() {
   //Decorate contacts
   decorateTwoColumn('.contacts', {
-    classes: ['responsive-row', 'md:mt-24', 'gap-10', 'md:gap-24', 'mb-24'],
+    classes: ['responsive-row', 'gap-10', 'md:gap-24', 'mb-24'],
     childModifiers: [
       {
         selector: 'h3',
@@ -34,6 +34,12 @@ async function decoratePage() {
       {
         selector: 'div:nth-of-type(2) > h2',
         modifier: { classes: ['text-lg', 'mb-0', 'secondary-font'] }
+      },
+      {
+        selector: 'div:nth-of-type(2) > p',
+        callback: (element: Element) => {
+          loadFragmentByElement(element);
+        }
       }
     ]
   });
