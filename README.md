@@ -1,6 +1,7 @@
 # helix-typescript-template
 
-An opinionated quick start template for bootstrapping a helix site with Typescript, Webpack and Tailwind CSS.
+A **highly opinionated** quick start template for bootstrapping a H
+elix site with Typescript, Webpack and Tailwind CSS.
 
 [Example](https://dev--helix-typescript-template--dylandepass.hlx.page)
 
@@ -48,10 +49,14 @@ Consider the example below where we have a block that we'd like to decorate
   <h1>Get In Touch!</h1>
   <h3>+1 555 485 8435</h1>
   <h3>template@example.com</h1>
+  <div class="form">
+    <p>/app/forms/email-form.html</p>
+    <a href="http://foo.com/sheet">Sheet</>
+  </div>
 </div>
 ```
 
-We want to add some classes, attributes insert an icon and also wrap in a `section` tag.
+We want to add some classes, attributes, insert an icon and also wrap in a `section` tag. This block also has a form we want to load from the forms directory.
 
 ```html
 <section>
@@ -59,6 +64,17 @@ We want to add some classes, attributes insert an icon and also wrap in a `secti
     <h1 class="font-light">Get In Touch!</h1>
     <h3><i class="fas fa-phone"></i>+1 555 485 8435</h1>
     <h3>template@example.com</h1>
+    <!-- Loaded Form -->
+    <form id="emailForm" class="form" method="post">
+      <div class="formField">
+          <input size="1" type="text" name="email" id="form-field-email" placeholder="Email" required="required" aria-required="true">
+      </div>
+      <div class="formField">
+          <button id="emailSubmit" type="submit">
+            <span>Get updates</span>
+          </button>
+      </div>
+    </form>
   </div>
 </section>
 ```
@@ -86,6 +102,11 @@ if (block) {
     icon.classList.add('fa-phone');
     phoneBlock.insertAdjacentElement('afterbegin', icon);
   }
+
+  const formBlock = blog.querySelector('.form');
+  if (formBlock) {
+    loadFragmentBySelector('.fragment');
+  }
 }
 ```
 
@@ -108,6 +129,12 @@ decorateElement('.block', {
       modifier: {
         inserts: [{ tag: 'i', classes: ['fas', 'fa-phone'], position: 'afterbegin' }]
       }
+    },
+    {
+      selector: '.form',
+      callback: (element: Element) => {
+        loadFragmentBySelector('.fragment');
+      }
     }
   ]
 });
@@ -119,7 +146,11 @@ There are 40% less code lines in this simple example and almost half the amount 
 
 Semantic CSS is not without it's challenges, it can be hard to maintain, you are constantly switching context between html and css and coming up with meaningful class names is always a challenge. Updating CSS can also bring with it some FUD about breaking other components if your CSS is not structured or organized correctly.
 
-In this template we say goodbye to all semantic CSS when it comes to the structure of a page and only use it for simple stylings like colors and font styling. All customizable stylings exist in a single [theme.css](/theme.css) file. Our structural CSS comes courtesy of [Tailwind](https://tailwindcss.com), a utility first CSS framework that has exploded in popularity over the last couple years for it's ease of use and the speed at which you can style HTML.
+In this template we say goodbye to all semantic CSS when it comes to the structure of a page and only use it for simple stylings like colors and font styling. All customizable stylings exist in a single [theme.css](/theme.css) file.
+
+Our structural CSS comes courtesy of [Tailwind](https://tailwindcss.com), a utility first CSS framework that has exploded in popularity over the last couple years for it's ease of use and the speed at which you can style HTML. The number of lines of code written in this project would be significantly higher if custom CSS was written, which highlights a major benefit of using Tailwind as your projects CSS does not grow linearly. By having utility class names that will be shared between elements, it guarantees a consistent bundle size. Furthermore, Tailwind paired with Purge CSS will remove any unused styles so the codebase will not be bloated with extra classes.
+
+<img src="https://i.imgur.com/vJxzhgB.png" style="max-width:600px;">
 
 A great [Cheat Sheet](https://nerdcave.com/tailwind-cheat-sheet) is available for tailwind that will speed up development time while getting started with the framework.
 
@@ -137,5 +168,5 @@ The build folder contains the following
 
 - [runtime-bundle.js](/build/runtime-bundle.js) bundle (1 kb) which contains code to load our chunks.
 - [shared-bundle.js](/build/shared-bundle.js) bundle (148 bytes) which contains code that is shared across all pages (currently just [render-jsx](https://www.npmjs.com/package/render-jsx))
-- [app.css](/build/app.css) file (18kb) which contains our shared css, mostly Tailwind classes
+- [app.css](/build/app.css) file (18kb) which contains our shared css which covers 95% of styling across the entire site and consists mostly of Tailwind classes
 - A css and js file for every page.
