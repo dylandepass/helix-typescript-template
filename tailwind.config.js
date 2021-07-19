@@ -19,8 +19,10 @@ module.exports = {
   theme: {
     extend: {
       fontSize: {
-        '8xl': '6.7rem',
-        '12xl': '11rem'
+        'hero-h1': '10.9rem',
+        'hero-h2': '4.05rem',
+        'mobile-hero-h1': '6.6rem',
+        'mobile-hero-h2': '2.45rem'
       },
       container: {
         screens: {

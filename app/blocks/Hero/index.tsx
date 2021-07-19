@@ -31,11 +31,21 @@ export async function decorate(elementOrSelector: Element | string): Promise<voi
       childModifiers: [
         {
           selector: 'h1',
-          modifier: { classes: ['text-8xl', 'uppercase', 'leading-tight', 'font-extrabold', 'md:text-12xl'] }
+          modifier: {
+            classes: [
+              'uppercase',
+              'text-mobile-hero-h1',
+              'md:text-hero-h1',
+              'h-32',
+              'md:h-56',
+              'font-extrabold',
+              'text-mobile-black'
+            ]
+          }
         },
         {
           selector: 'h2',
-          modifier: { classes: ['text-4xl', 'font-semibold', 'uppercase', 'md:text-6xl', 'mb-10'] }
+          modifier: { classes: ['text-mobile-hero-h2', 'font-light', 'uppercase', 'md:text-hero-h2', 'mb-10'] }
         }
       ]
     });

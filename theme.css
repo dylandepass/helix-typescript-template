@@ -1,3 +1,27 @@
+@font-face {
+  font-family: 'Roboto';
+  src: url('/app/assets/fonts/Roboto-Regular.woff') format('woff');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('/app/assets/fonts/Roboto-Light.woff') format('woff');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('/app/assets/fonts/Roboto-Black.woff') format('woff');
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: 'Josefin Sans';
+  src: url('/app/assets/fonts/JosefinSans-Regular.woff') format('woff');
+  font-weight: 400;
+}
+
 :root {
   /* THEME */
   --theme-color: #f4b942;
