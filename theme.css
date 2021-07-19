@@ -3,9 +3,10 @@
   --theme-color: #f4b942;
   --background-color: #f1f1f1;
   --header-background-color: #000000;
-  --footer-background-color: #333333;
+  --footer-background-color: #000000;
   --line-color: #cccccc;
-  --separator-color: #cccccc;
+  --separator-color: #ffff30;
+  --footer-separator-color: #333333;
 
   /* TEXT */
   --font-family: 'Roboto', sans-serif;
@@ -21,12 +22,12 @@
   --hero-text-color: #000000;
 
   /* CARDS */
-  --blog-image-matte-background-color: #dbeafe;
+  --blog-image-matte-background-color: #dddddd;
   --card-1-background-color: #a3a3a5;
   --card-1-text-color: #ffffff;
   --card-2-background-color: #f4b942;
   --card-2-text-color: #202131;
-  --4-card-background-color: #202131;
+  --4-card-background-color: #000000;
   --4-card-text-color: #ffffff;
 }
 
@@ -39,6 +40,7 @@
     --footer-background-color: #202131;
     --line-color: #303144;
     --separator-color: #303144;
+    --footer-separator-color: #333333;
 
     /* TEXT */
     --font-family: 'Roboto', sans-serif;
