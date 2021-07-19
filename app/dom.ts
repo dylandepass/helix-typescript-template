@@ -10,6 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
+import { FORM_SINK_AUTH, FORM_SINK_URL } from './constants';
+
 export interface ElementModifier {
   classes?: string[];
   attributes?: Record<string, string>;
@@ -20,6 +22,7 @@ export interface ElementModifier {
 export interface ChildElementModifier {
   selector: string;
   modifier?: ElementModifier;
+  callback?: (element: Element) => void;
   validation?: (element: Element) => boolean;
 }
 export interface WrapModifier {
@@ -33,6 +36,10 @@ export interface InsertModifier {
   innerHTML?: string;
   classes?: string[];
   attributes?: Record<string, string>;
+}
+export interface FormSinkBody {
+  sheet: string;
+  data: { name: string; value: string }[];
 }
 
 /**
@@ -54,7 +61,7 @@ export function loadTemplate(): void {
  * @param {string} url     Script URL
  * @param {string} type    Script type
  *
- * @returns       Promise
+ * @returns                Promise
  */
 export function loadScript(url: string, type = 'text/javascript'): Promise<void> {
   return new Promise(function (resolve, reject) {
@@ -79,8 +86,8 @@ export function loadScript(url: string, type = 'text/javascript'): Promise<void>
 /**
  * Loads a ccs file into the head tag
  *
- * @param {string} href  Script Href
- * @returns     Promise
+ * @param {string} href   Script Href
+ * @returns               Promise
  */
 export function loadCSS(href: string): Promise<void> {
   return new Promise(function (resolve, reject) {
@@ -108,34 +115,47 @@ export function loadCSS(href: string): Promise<void> {
 /**
  * Loads an HTML fragments matching the given selector
  *
- * @param {string} selector  selector to match
- * @returns     Promise
+ * @param {string} selector   Selector to match
+ * @returns                   Promise
  */
-export async function loadFragmentBySelector(selector: string): Promise<string | void> {
+export async function loadFragmentBySelector(selector: string): Promise<Element | void> {
   const fragmentElements = document.querySelectorAll(selector);
   for (const fragmentElement of Array.from(fragmentElements)) {
-    const path = fragmentElement.querySelector('p:first-of-type')?.textContent;
-    console.log('path ' + path);
-    if (path) {
-      const fragment = await loadFragment(path);
-      fragmentElement.insertAdjacentHTML('beforebegin', fragment);
-      fragmentElement.remove();
-      return fragment;
-    }
+    return loadFragmentByElement(fragmentElement);
+  }
+}
+
+/**
+ * Loads an HTML fragment matching the given element
+ *
+ * @param {Element} element   Element to match
+ * @returns                   Promise
+ */
+export async function loadFragmentByElement(element: Element): Promise<Element | void> {
+  const path = element.querySelector('p:first-of-type')?.textContent || element.textContent;
+  if (path) {
+    const fragment = await fetchFragmentAtPath(path);
+    element.insertAdjacentHTML('beforebegin', fragment);
+    element.remove();
+    return element;
   }
 }
 
 /**
  * Retrieves an HTML fragment at the given path
  *
- * @param {string} path  Fragment path
- * @returns     Promise
+ * @param {string} path   Fragment path
+ * @returns               Promise
  */
-export function loadFragment(path: string): Promise<string> {
+export function fetchFragmentAtPath(path: string): Promise<string> {
   return new Promise(function (resolve, reject) {
-    fetch(path).then((response) => {
-      resolve(response.text());
-    });
+    fetch(path)
+      .then((response) => {
+        resolve(response.text());
+      })
+      .catch((error: string) => {
+        reject(error);
+      });
   });
 }
 
@@ -143,7 +163,7 @@ export function loadFragment(path: string): Promise<string> {
  * Creates an element
  * @param {string} name                     Tag name
  * @param {Record<string, string>} attrs    Attributes
- * @returns {HTMLElement} The created element
+ * @returns {HTMLElement}                   The created element
  */
 export function createElement(name: string, attrs?: Record<string, string>): HTMLElement {
   const el = document.createElement(name);
@@ -157,8 +177,8 @@ export function createElement(name: string, attrs?: Record<string, string>): HTM
 
 /**
  * If a selector is provided the dom is queried for the element, else the element provided is returned
- * @param {Element | string} elementOrSelector An element or a selector string
- * @returns {Element | undefined}
+ * @param {Element | string} elementOrSelector        An element or a selector string
+ * @returns {Element | undefined}                     The element or undefined
  */
 export function resolveElement(elementOrSelector: Element | string): Element | undefined {
   let el = elementOrSelector;
@@ -176,7 +196,7 @@ export function resolveElement(elementOrSelector: Element | string): Element | u
  * Decorate the element according to the provided modifier
  * @param {Element | string} elementOrSelector  An element or a selector string
  * @param {ElementModifier} modifier            The modifier used to decorate the element
- * @returns {Element | undefined}
+ * @returns {Element | undefined}               The decorated element or undefined
  */
 export function decorateElement(elementOrSelector: Element | string, modifier: ElementModifier): Element | undefined {
   const { classes, attributes, wraps, inserts, childModifiers } = modifier;
@@ -212,14 +232,15 @@ export function decorateElement(elementOrSelector: Element | string, modifier: E
  * Decorates the children of the provided element
  * @param {Element} element                       The element
  * @param {ChildElementModifier} childModifier    The modifier that defines which elements to modify and how
- * @returns
+ * @returns {Element | undefined}                 The decorated child element or undefined
  */
 export function decorateChildElement(element: Element, childModifier: ChildElementModifier): Element | null {
-  const { selector, modifier, validation } = childModifier;
+  const { selector, modifier, callback, validation } = childModifier;
   const childElements = element.querySelectorAll(selector);
   for (const childElement of Array.from(childElements)) {
     if (childElement) {
       if (modifier) decorateElement(childElement, modifier);
+      if (callback) callback(childElement);
 
       if (validation) {
         if (!validation(childElement)) {
@@ -360,4 +381,28 @@ export function onElementVisible(
   if (el) {
     observer.observe(el);
   }
+}
+
+/**
+ * Add a submit event listener to the provided form. Posts the form data with the provided body
+ *
+ * @param {HTMLFormElement} form        The form to add the submit event listener to
+ * @param {FormSinkBody} body           The form body to post
+ *
+ * @returns
+ */
+export function decorateFormSubmit(form: Element, body: FormSinkBody): void {
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    await fetch(FORM_SINK_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: FORM_SINK_AUTH
+      },
+      body: JSON.stringify(body)
+    }).catch((error: string) => {
+      console.error(error);
+    });
+  });
 }

@@ -10,9 +10,9 @@
  * governing permissions and limitations under the License.
  */
 
-import { decorateElement, resolveElement } from '../../dom';
+import { decorateElement, decorateFormSubmit, FormSinkBody, loadFragmentBySelector, resolveElement } from '../../dom';
 
-export function decorate(elementOrSelector: Element | string): void {
+export async function decorate(elementOrSelector: Element | string): Promise<void> {
   const element = resolveElement(elementOrSelector);
   if (element) {
     decorateElement(element, {
@@ -39,5 +39,27 @@ export function decorate(elementOrSelector: Element | string): void {
         }
       ]
     });
+
+    const formBlock = element.querySelector('.form');
+    const sheet = formBlock?.querySelector('a')?.getAttribute('href');
+    await loadFragmentBySelector('.form');
+    const form = element.querySelector('#emailForm');
+    if (form && sheet) {
+      const formData = new FormData(form as HTMLFormElement);
+
+      const fields = Array.from(formData.entries()).map((value) => {
+        return {
+          name: value[0],
+          value: value[1]
+        };
+      });
+
+      const body = {
+        sheet: sheet,
+        data: fields
+      };
+
+      decorateFormSubmit(form, body as FormSinkBody);
+    }
   }
 }
